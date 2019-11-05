@@ -53168,3 +53168,7 @@ time 229.8275: deletion of length 1 in org/gene 62/192
 time 207.7906: insertion of length 1 in org/gene 62/199
 time 229.4274: insertion of length 1 in org/gene 62/199
 time 225.9130: insertion of length 1 in org/gene 62/200
+
+
+
+12400 genes in 62 species generated

@@ -1,0 +1,137 @@
+Scheme Name       : step_5
+Scheme lnL        : -1243.4026963710785
+Scheme AIC        : 2756.80539274
+Number of params  : 135
+Number of sites   : 20
+Number of subsets : 15
+
+Subset | Best Model | # sites    | subset id                        | Partition names                                                                                     
+1      | LG         | 3          | 4b90010ccf9b033d533b9a37e8ef640c | gene4, gene1, gene6                                                                                 
+2      | MTART      | 1          | 466b3b3ad86f38aac9b23996b91d2c88 | gene2                                                                                               
+3      | RTREV      | 1          | 06ea47ecdbf7b74d2410784fc8d58415 | gene3                                                                                               
+4      | WAG        | 2          | 0ad1c9d5c1edf69cff66dc2824ab9463 | gene16, gene5                                                                                       
+5      | HIVB       | 3          | 0bdf81e4f59ac1c5fc26496d0c2ce9ce | gene7, gene13, gene11                                                                               
+6      | RTREV      | 1          | 41a0333065d1cc921e91c7e642533933 | gene8                                                                                               
+7      | MTZOA      | 1          | a767f29600a3f08fc87ec04f85b84103 | gene9                                                                                               
+8      | MTART      | 1          | 7ff18c8b39eb13a913000be3aecccf0d | gene10                                                                                              
+9      | MTZOA      | 1          | db3ce702b55f2cf822bfe3643d838f24 | gene12                                                                                              
+10     | MTZOA      | 1          | 4d49f1b1a28d6ca49a380cac93543d8d | gene14                                                                                              
+11     | FLU        | 1          | 82779a05806adededf9a61d03c56e753 | gene15                                                                                              
+12     | RTREV      | 1          | 3cdf2bcef38aaeee625f00b81ad1b596 | gene17                                                                                              
+13     | LG         | 1          | 65d37f913ac8a072ab9bf6e81f15c079 | gene18                                                                                              
+14     | FLU        | 1          | 6f3b702cba2089f5c82bc6ff751b0257 | gene19                                                                                              
+15     | LG         | 1          | 7f0dba777167c0271040619b6b465874 | gene20                                                                                              
+
+
+Scheme Description in PartitionFinder format
+Scheme_step_5 = (gene4, gene1, gene6) (gene2) (gene3) (gene16, gene5) (gene7, gene13, gene11) (gene8) (gene9) (gene10) (gene12) (gene14) (gene15) (gene17) (gene18) (gene19) (gene20);
+
+Nexus formatted character sets
+begin sets;
+	charset Subset1 = 4-4 1-1 6-6;
+	charset Subset2 = 2-2;
+	charset Subset3 = 3-3;
+	charset Subset4 = 16-16 5-5;
+	charset Subset5 = 7-7 13-13 11-11;
+	charset Subset6 = 8-8;
+	charset Subset7 = 9-9;
+	charset Subset8 = 10-10;
+	charset Subset9 = 12-12;
+	charset Subset10 = 14-14;
+	charset Subset11 = 15-15;
+	charset Subset12 = 17-17;
+	charset Subset13 = 18-18;
+	charset Subset14 = 19-19;
+	charset Subset15 = 20-20;
+	charpartition PartitionFinder = Group1:Subset1, Group2:Subset2, Group3:Subset3, Group4:Subset4, Group5:Subset5, Group6:Subset6, Group7:Subset7, Group8:Subset8, Group9:Subset9, Group10:Subset10, Group11:Subset11, Group12:Subset12, Group13:Subset13, Group14:Subset14, Group15:Subset15;
+end;
+
+
+Nexus formatted character sets for IQtree
+Warning: the models written in the charpartition are just the best model found in this analysis. Not all models are available in IQtree, so you may need to set up specific model lists for your analysis
+
+#nexus
+begin sets;
+	charset Subset1 = 4-4 1-1 6-6;
+	charset Subset2 = 2-2;
+	charset Subset3 = 3-3;
+	charset Subset4 = 16-16 5-5;
+	charset Subset5 = 7-7 13-13 11-11;
+	charset Subset6 = 8-8;
+	charset Subset7 = 9-9;
+	charset Subset8 = 10-10;
+	charset Subset9 = 12-12;
+	charset Subset10 = 14-14;
+	charset Subset11 = 15-15;
+	charset Subset12 = 17-17;
+	charset Subset13 = 18-18;
+	charset Subset14 = 19-19;
+	charset Subset15 = 20-20;
+	charpartition PartitionFinder = LG:Subset1, MTART:Subset2, RTREV:Subset3, WAG:Subset4, HIVB:Subset5, RTREV:Subset6, MTZOA:Subset7, MTART:Subset8, MTZOA:Subset9, MTZOA:Subset10, FLU:Subset11, RTREV:Subset12, LG:Subset13, FLU:Subset14, LG:Subset15;
+end;
+
+
+RaxML-style partition definitions
+Warning: RAxML allows for only a single model of rate heterogeneity in partitioned analyses. I.e. all partitions must be assigned one of three types of model: No heterogeneity (e.g. GTR); +G (e.g. GTR+G); or +I+G (e.g. GTR+I+G). If the best models for your datasetcontain different types of model for different subsets you will need to decide on the best rate heterogeneity model before you run RAxML. If you prefer to do things more rigorously, you can run separate PartitionFinder analyses for each type of rate heterogenetity Then choose the scheme with the lowest AIC/AICc/BIC score. Note that these re-runs will be quick!
+
+LG, Subset1 = 4-4, 1-1, 6-6
+MTART, Subset2 = 2-2
+RTREV, Subset3 = 3-3
+WAG, Subset4 = 16-16, 5-5
+HIVB, Subset5 = 7-7, 13-13, 11-11
+RTREV, Subset6 = 8-8
+MTZOA, Subset7 = 9-9
+MTART, Subset8 = 10-10
+MTZOA, Subset9 = 12-12
+MTZOA, Subset10 = 14-14
+FLU, Subset11 = 15-15
+RTREV, Subset12 = 17-17
+LG, Subset13 = 18-18
+FLU, Subset14 = 19-19
+LG, Subset15 = 20-20
+
+
+MrBayes block for partition definitions
+Warning: MrBayes only allows a relatively small collection of models. If any model in your analysis is not one that is included in MrBayes (e.g. by setting nst = 1, 2, or 6 for DNA sequences; or is not in the available list of protein models for MrBayes)then this MrBayes block will just set that model to nst = 6 for DNA, or 'wag' for Protein. Similarly, the only additional parameters that this MrBayes block will include are +I and +G. Other  parameters, such as +F and +X, are ignored. If you want to use this MrBayes block for your analysis, please make sure to check it carefully before you use it we've done our best to make it accurate, but there may be errors that remain!
+
+begin mrbayes;
+
+	charset Subset1 = 4-4 1-1 6-6;
+	charset Subset2 = 2-2;
+	charset Subset3 = 3-3;
+	charset Subset4 = 16-16 5-5;
+	charset Subset5 = 7-7 13-13 11-11;
+	charset Subset6 = 8-8;
+	charset Subset7 = 9-9;
+	charset Subset8 = 10-10;
+	charset Subset9 = 12-12;
+	charset Subset10 = 14-14;
+	charset Subset11 = 15-15;
+	charset Subset12 = 17-17;
+	charset Subset13 = 18-18;
+	charset Subset14 = 19-19;
+	charset Subset15 = 20-20;
+
+	partition PartitionFinder = 15:Subset1, Subset2, Subset3, Subset4, Subset5, Subset6, Subset7, Subset8, Subset9, Subset10, Subset11, Subset12, Subset13, Subset14, Subset15;
+	set partition=PartitionFinder;
+
+	prset applyto=(1) aamodelpr=fixed(wag);
+	prset applyto=(2) aamodelpr=fixed(wag);
+	prset applyto=(3) aamodelpr=fixed(rtrev);
+	prset applyto=(4) aamodelpr=fixed(wag);
+	prset applyto=(5) aamodelpr=fixed(wag);
+	prset applyto=(6) aamodelpr=fixed(rtrev);
+	prset applyto=(7) aamodelpr=fixed(wag);
+	prset applyto=(8) aamodelpr=fixed(wag);
+	prset applyto=(9) aamodelpr=fixed(wag);
+	prset applyto=(10) aamodelpr=fixed(wag);
+	prset applyto=(11) aamodelpr=fixed(wag);
+	prset applyto=(12) aamodelpr=fixed(rtrev);
+	prset applyto=(13) aamodelpr=fixed(wag);
+	prset applyto=(14) aamodelpr=fixed(wag);
+	prset applyto=(15) aamodelpr=fixed(wag);
+
+	prset applyto=(all) ratepr=variable;
+	unlink statefreq=(all) revmat=(all) shape=(all) pinvar=(all) tratio=(all);
+
+end;

@@ -1,6 +1,8 @@
 #!/bin/bash
 
-input_folder='sampledMSAs'
+input_folder='sampledMSAs/'
+files=${input_folder}*.phy
+###files=`ls ${input_folder}*.phy`
 
 #mkdir part_N20
 #mkdir part_N40
@@ -12,19 +14,63 @@ input_folder='sampledMSAs'
 # do all N20
 
 # aic rcluster
-
-for f in glob.glob(os.path.join(input_folder, '*.phy')):
-    do
-	cp f part_N20/temp_align.phy
-	cp partition_finder_N20_raxml_aic.cfg part_N20/partition_finder_cfg
-	
-	python2.7 PartitionFinderProtein.py ${OUTDIR} --raxml -p 4
+for f in files;
+	do
+	cp $f part_N20/temp_align.phy
+	cp partition_finder_N20_raxml_aic.cfg part_N20/partition_finder.cfg	
+	python2.7 ../../partition_finder_2/partitionfinder-2.1.1/PartitionFinderProtein.py part_N20/ --raxml -p 4
+done
 
 # bic rcluster
+for f in files;
+	do
+	cp $f part_N20/temp_align.phy
+	cp partition_finder_N20_raxml_bic.cfg part_N20/partition_finder.cfg	
+	python2.7 ../../partition_finder_2/partitionfinder-2.1.1/PartitionFinderProtein.py part_N20/ --raxml -p 4
+done
+
 # aicc rcluster
+for f in files;
+	do
+	cp $f part_N20/temp_align.phy
+	cp partition_finder_N20_raxml_aicc.cfg part_N20/partition_finder.cfg	
+	python2.7 ../../partition_finder_2/partitionfinder-2.1.1/PartitionFinderProtein.py part_N20/ --raxml -p 4
+
+!iqtree -s ../partition_finder_2/PartitionAlfSims/test1_24oct/test_MSA1.phy -spp ../partition_finder_2/PartitionAlfSims/test1_partitionFile.nex
+
+	cp part_N20/best_scheme.txt ../
+	cp part_N20/
+done
+
+
+
+
+
+
 # aic greedy
+for f in files;
+	do
+	cp $f part_N20/temp_align.phy
+	cp partition_finder_N20_greedy_aic.cfg part_N20/partition_finder.cfg	
+	python2.7 ../../partition_finder_2/partitionfinder-2.1.1/PartitionFinderProtein.py part_N20/ -p 4
+done
+
 # bic greedy
+for f in files;
+	do
+	cp $f part_N20/temp_align.phy
+	cp partition_finder_N20_greedy_bic.cfg part_N20/partition_finder.cfg	
+	python2.7 ../../partition_finder_2/partitionfinder-2.1.1/PartitionFinderProtein.py part_N20/ -p 4
+done
+
 # aicc greedy
+for f in files;
+	do
+	cp $f part_N20/temp_align.phy
+	cp partition_finder_N20_greedy_aicc.cfg part_N20/partition_finder.cfg	
+	python2.7 ../../partition_finder_2/partitionfinder-2.1.1/PartitionFinderProtein.py part_N20/ -p 4
+done
+
 
 
 # go through each file in sampled_MSAs/ and rename into the correpsonding partitioning

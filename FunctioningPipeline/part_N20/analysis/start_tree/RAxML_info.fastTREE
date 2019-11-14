@@ -1,0 +1,254 @@
+
+
+WARNING: RAxML is not checking sequences for duplicate seqs and sites with missing data!
+
+
+
+This is RAxML version 8.2.9 released by Alexandros Stamatakis on July 20 2016.
+
+With greatly appreciated code contributions by:
+Andre Aberer      (HITS)
+Simon Berger      (HITS)
+Alexey Kozlov     (HITS)
+Kassian Kobert    (HITS)
+David Dao         (KIT and HITS)
+Sarah Lutteropp   (KIT and HITS)
+Nick Pattengale   (Sandia)
+Wayne Pfeiffer    (SDSC)
+Akifumi S. Tanabe (NRIFS)
+Charlie Taylor    (UF)
+
+
+Alignment has 20 distinct alignment patterns
+
+Proportion of gaps and completely undetermined characters in this alignment: 36.77%
+
+RAxML experimental very fast tree search
+
+Using 20 distinct models/data partitions with joint branch length optimization
+
+
+All free model parameters will be estimated by RAxML
+GAMMA model of rate heteorgeneity, ML estimate of alpha-parameter
+
+GAMMA Model parameters will be estimated up to an accuracy of 10.0000000000 Log Likelihood units
+
+Partition: 0
+Alignment Patterns: 1
+Name: Subset1
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 1
+Alignment Patterns: 1
+Name: Subset2
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 2
+Alignment Patterns: 1
+Name: Subset3
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 3
+Alignment Patterns: 1
+Name: Subset4
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 4
+Alignment Patterns: 1
+Name: Subset5
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 5
+Alignment Patterns: 1
+Name: Subset6
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 6
+Alignment Patterns: 1
+Name: Subset7
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 7
+Alignment Patterns: 1
+Name: Subset8
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 8
+Alignment Patterns: 1
+Name: Subset9
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 9
+Alignment Patterns: 1
+Name: Subset10
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 10
+Alignment Patterns: 1
+Name: Subset11
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 11
+Alignment Patterns: 1
+Name: Subset12
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 12
+Alignment Patterns: 1
+Name: Subset13
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 13
+Alignment Patterns: 1
+Name: Subset14
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 14
+Alignment Patterns: 1
+Name: Subset15
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 15
+Alignment Patterns: 1
+Name: Subset16
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 16
+Alignment Patterns: 1
+Name: Subset17
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 17
+Alignment Patterns: 1
+Name: Subset18
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 18
+Alignment Patterns: 1
+Name: Subset19
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+Partition: 19
+Alignment Patterns: 1
+Name: Subset20
+DataType: AA
+Substitution Matrix: LG
+Using fixed base frequencies
+
+
+
+
+RAxML was called as follows:
+
+/Users/kgilbert/Documents/UNIL/partition_finder_2/partitionfinder-2.1.1/programs/raxml_pthreads -f E -s ./analysis/start_tree/filtered_source.phy -m PROTGAMMALG -O -n fastTREE -# 1 -p 123456789 -q ./analysis/start_tree/partitions.txt -e 10 -w /Users/kgilbert/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline/part_N20/analysis/start_tree -T 4 
+
+
+Time after init : 0.014318
+Time after init and starting tree: 3.437767
+Time after init, starting tree, mod opt: 4.425736
+Partion 0 number of Cats: 1
+Partion 1 number of Cats: 1
+Partion 2 number of Cats: 1
+Partion 3 number of Cats: 1
+Partion 4 number of Cats: 1
+Partion 5 number of Cats: 1
+Partion 6 number of Cats: 1
+Partion 7 number of Cats: 1
+Partion 8 number of Cats: 1
+Partion 9 number of Cats: 1
+Partion 10 number of Cats: 1
+Partion 11 number of Cats: 1
+Partion 12 number of Cats: 1
+Partion 13 number of Cats: 1
+Partion 14 number of Cats: 1
+Partion 15 number of Cats: 1
+Partion 16 number of Cats: 1
+Partion 17 number of Cats: 1
+Partion 18 number of Cats: 1
+Partion 19 number of Cats: 1
+LH after SPRs -1284.429482, after NNI -1278.968090
+LH after SPRs -1278.094873, after NNI -1276.536314
+LH after SPRs -1275.499552, after NNI -1274.287168
+LH after SPRs -1273.623368, after NNI -1273.128983
+LH after SPRs -1273.126338, after NNI -1273.124984
+RAxML fast tree written to file: /Users/kgilbert/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline/part_N20/analysis/start_tree/RAxML_fastTree.fastTREE
+
+Model parameters (binary file format) written to: /Users/kgilbert/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline/part_N20/analysis/start_tree/RAxML_binaryModelParameters.fastTREE
+Total execution time: 77.089572
+Good bye ... 

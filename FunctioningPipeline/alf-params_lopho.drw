@@ -18,9 +18,9 @@ unitIsPam := true:
 
 # parameters concerning the root genome
 realseed := false;
-protStart := 200;
+protStart := 100;
 minGeneLength := 50;
-gammaLengthDist := [3, 133.8063];
+gammaLengthDist := [1, 1];
 blocksize := 1:
 
 # parameters concerning the species tree

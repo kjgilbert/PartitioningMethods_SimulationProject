@@ -69,3 +69,7 @@ legend("topright", c("IQTree BIC"), col=c("orange"), pch=1, pt.lwd=2)
 
 text(x=c(1,1.1,2,2.1,3,3.1,4), y=rep(104557,6), labels=c(dat$numParts[3:4], dat$numParts[2], dat$numParts[6], dat$numParts[1], dat$numParts[5], 0))
 
+
+plot(c(1:4, 1.1:3.1), rep(0.0847457627118644, 7), xaxt="n", ylim=c(0.08, 0.09), xlab="Partitioning Criterion", ylab="Normalized Robinson-Foulds", pch=15)
+axis(side=1, at=1:4, labels=c("AIC", "AICc", "BIC", "none"))
+

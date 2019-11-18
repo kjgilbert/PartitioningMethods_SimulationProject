@@ -79,13 +79,14 @@ for dir in ${directories[*]}
 
 
 
+## touch partitioning_treebuilding_output.txt # because it needs to exist to remove it.... fix this step to be more elegant!
 
-rm partitioning_treebuilding_output.txt
-touch partitioning_treebuilding_output.txt
+## rm partitioning_treebuilding_output.txt
+## touch partitioning_treebuilding_output.txt
 
 #________go through each gene sample size set________#
 
-directories=(N10 N20 N40 N80)
+directories=('N10' 'N20' 'N40' 'N80')
 
 for dir in ${directories[*]};
 	do

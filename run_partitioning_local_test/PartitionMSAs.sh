@@ -72,8 +72,6 @@ search = greedy;
 '
 
 
-for dir in ${directories[*]}
-
 
 
 

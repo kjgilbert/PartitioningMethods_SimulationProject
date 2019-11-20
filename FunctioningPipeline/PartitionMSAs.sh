@@ -1,6 +1,7 @@
 #!/bin/bash
 
 current_path=$1
+run_path=$2
 input_folder=$current_path'sampledMSAs/'
 files=${input_folder}*.phy
 
@@ -126,7 +127,7 @@ for f in $files;
     rm -rf 'part_N'$raw_samp'/analysis'
     rm -f 'part_N'$raw_samp'/log.txt'
     cp 'partition_finder_N'$raw_samp'_raxml_aic.cfg' 'part_N'$raw_samp'/partition_finder.cfg'
-    python $current_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' --raxml -p 4
+    python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' --raxml -p 4
     # copy nexus best scheme to a partition file
     awk '/nexus/,/end/' 'part_N'$raw_samp'/analysis/best_scheme.txt' > 'part_N'$raw_samp'/best_scheme_nexus.txt'
     # save information criteria output from partition finder
@@ -135,7 +136,7 @@ for f in $files;
 #________run iqtree with partition file - raxml aic________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_PartitionFinder
-    $current_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
+    $run_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
     echo $(grep -A 12 MAXIMUM 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
     echo $(grep -A 2 newick 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
     echo $(grep -A 5 CONSENSUS 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
@@ -147,7 +148,7 @@ for f in $files;
     rm -rf 'part_N'$raw_samp'/analysis'
     rm -f 'part_N'$raw_samp'/log.txt'
     cp 'partition_finder_N'$raw_samp'_raxml_aicc.cfg' 'part_N'$raw_samp'/partition_finder.cfg'
-    python $current_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' --raxml -p 4
+    python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' --raxml -p 4
     # copy nexus best scheme to a partition file
     awk '/nexus/,/end/' 'part_N'$raw_samp'/analysis/best_scheme.txt' > 'part_N'$raw_samp'/best_scheme_nexus.txt'
     # save information criteria output from partition finder
@@ -155,7 +156,7 @@ for f in $files;
 #________run iqtree with partition file - raxml aicc________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_PartitionFinder
-    $current_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
+    $run_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
     echo $(grep -A 12 MAXIMUM 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
     echo $(grep -A 2 newick 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
     echo $(grep -A 5 CONSENSUS 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
@@ -167,7 +168,7 @@ for f in $files;
     rm -rf 'part_N'$raw_samp'/analysis'
     rm -f 'part_N'$raw_samp'/log.txt'
     cp 'partition_finder_N'$raw_samp'_raxml_bic.cfg' 'part_N'$raw_samp'/partition_finder.cfg'
-    python $current_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' --raxml -p 4
+    python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' --raxml -p 4
     # copy nexus best scheme to a partition file
     awk '/nexus/,/end/' 'part_N'$raw_samp'/analysis/best_scheme.txt' > 'part_N'$raw_samp'/best_scheme_nexus.txt'
     # save information criteria output from partition finder
@@ -175,7 +176,7 @@ for f in $files;
 #________run iqtree with partition file - raxml aicc________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_PartitionFinder
-    $current_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
+    $run_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
     echo $(grep -A 12 MAXIMUM 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
     echo $(grep -A 2 newick 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
     echo $(grep -A 5 CONSENSUS 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
@@ -188,7 +189,7 @@ for f in $files;
     rm -rf 'part_N'$raw_samp'/analysis'
     rm -f 'part_N'$raw_samp'/log.txt'
     cp 'partition_finder_N'$raw_samp'_greedy_aic.cfg' 'part_N'$raw_samp'/partition_finder.cfg'
-    python $current_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' -p 4
+    python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' -p 4
     # copy nexus best scheme to a partition file
     awk '/nexus/,/end/' 'part_N'$raw_samp'/analysis/best_scheme.txt' > 'part_N'$raw_samp'/best_scheme_nexus.txt'
     # save information criteria output from partition finder
@@ -197,7 +198,7 @@ for f in $files;
 #________run iqtree with partition file - greedy aic________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_PartitionFinder
-    $current_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
+    $run_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
     echo $(grep -A 12 MAXIMUM 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
     echo $(grep -A 2 newick 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
     echo $(grep -A 5 CONSENSUS 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
@@ -209,7 +210,7 @@ for f in $files;
     rm -rf 'part_N'$raw_samp'/analysis'
     rm -f 'part_N'$raw_samp'/log.txt'
     cp 'partition_finder_N'$raw_samp'_greedy_aicc.cfg' 'part_N'$raw_samp'/partition_finder.cfg'
-    python $current_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' -p 4
+    python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' -p 4
     # copy nexus best scheme to a partition file
     awk '/nexus/,/end/' 'part_N'$raw_samp'/analysis/best_scheme.txt' > 'part_N'$raw_samp'/best_scheme_nexus.txt'
     # save information criteria output from partition finder
@@ -217,7 +218,7 @@ for f in $files;
 #________run iqtree with partition file - greedy aicc________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_PartitionFinder
-    $current_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
+    $run_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
     echo $(grep -A 12 MAXIMUM 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
     echo $(grep -A 2 newick 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
     echo $(grep -A 5 CONSENSUS 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
@@ -229,7 +230,7 @@ for f in $files;
     rm -rf 'part_N'$raw_samp'/analysis'
     rm -f 'part_N'$raw_samp'/log.txt'
     cp 'partition_finder_N'$raw_samp'_greedy_bic.cfg' 'part_N'$raw_samp'/partition_finder.cfg'
-    python $current_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' -p 4
+    python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' 'part_N'$raw_samp'/' -p 4
     # copy nexus best scheme to a partition file
     awk '/nexus/,/end/' 'part_N'$raw_samp'/analysis/best_scheme.txt' > 'part_N'$raw_samp'/best_scheme_nexus.txt'
     # save information criteria output from partition finder
@@ -237,7 +238,7 @@ for f in $files;
 #________run iqtree with partition file - greedy aicc________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_PartitionFinder
-    $current_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
+    $run_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -spp 'part_N'$raw_samp'/best_scheme_nexus.txt' -bb 1000
     echo $(grep -A 12 MAXIMUM 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
     echo $(grep -A 2 newick 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
     echo $(grep -A 5 CONSENSUS 'part_N'$raw_samp'/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
@@ -251,7 +252,7 @@ for f in $files;
 #________iqtree without partition file________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_Default, can be run once on the alignment without all the partition combinations:
-    $current_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -mrate G -bb 1000
+    $run_path'iqtree-1.6.12-Linux/bin/iqtree' -s 'part_N'$raw_samp'/temp_align.phy' -seed 123456789 -nt 4 -mrate G -bb 1000
     echo $(grep -A 12 MAXIMUM 'part_'$dir'/temp_align.phy.iqtree') >> partitioning_treebuilding_output.txt
     echo $(grep -A 2 newick 'part_'$dir'/temp_align.phy.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
     echo $(grep -A 5 CONSENSUS 'part_'$dir'/temp_align.phy.iqtree') >> partitioning_treebuilding_output.txt
@@ -259,5 +260,6 @@ for f in $files;
 
 
 
+done
 
-done # done all combos on that file
+

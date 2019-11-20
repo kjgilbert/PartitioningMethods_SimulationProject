@@ -19,7 +19,7 @@ unitIsPam := true:
 # parameters concerning the root genome
 realseed := false;
 protStart := 100;
-minGeneLength := 50;
+minGeneLength := 100;
 gammaLengthDist := [1, 1];
 blocksize := 1:
 

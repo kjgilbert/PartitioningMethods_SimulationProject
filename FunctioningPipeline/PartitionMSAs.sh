@@ -153,6 +153,7 @@ for f in $files;
     awk '/nexus/,/end/' 'part_N'$raw_samp'/analysis/best_scheme.txt' > 'part_N'$raw_samp'/best_scheme_nexus.txt'
     # save information criteria output from partition finder
     echo $(grep search 'part_N'$raw_samp'/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+    echo $(grep Scheme 'part_N'$raw_samp'/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
 #________run iqtree with partition file - raxml aicc________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_PartitionFinder
@@ -173,6 +174,7 @@ for f in $files;
     awk '/nexus/,/end/' 'part_N'$raw_samp'/analysis/best_scheme.txt' > 'part_N'$raw_samp'/best_scheme_nexus.txt'
     # save information criteria output from partition finder
     echo $(grep search 'part_N'$raw_samp'/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+    echo $(grep Scheme 'part_N'$raw_samp'/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
 #________run iqtree with partition file - raxml aicc________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_PartitionFinder
@@ -215,6 +217,7 @@ for f in $files;
     awk '/nexus/,/end/' 'part_N'$raw_samp'/analysis/best_scheme.txt' > 'part_N'$raw_samp'/best_scheme_nexus.txt'
     # save information criteria output from partition finder
     echo $(grep search 'part_N'$raw_samp'/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+    echo $(grep Scheme 'part_N'$raw_samp'/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
 #________run iqtree with partition file - greedy aicc________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_PartitionFinder
@@ -235,6 +238,7 @@ for f in $files;
     awk '/nexus/,/end/' 'part_N'$raw_samp'/analysis/best_scheme.txt' > 'part_N'$raw_samp'/best_scheme_nexus.txt'
     # save information criteria output from partition finder
     echo $(grep search 'part_N'$raw_samp'/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+    echo $(grep Scheme 'part_N'$raw_samp'/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
 #________run iqtree with partition file - greedy aicc________#
     rm -f 'part_N'$raw_samp'/best_scheme.txt.*'
     #IQTREE_PartitionFinder

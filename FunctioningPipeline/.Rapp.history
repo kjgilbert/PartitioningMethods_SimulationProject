@@ -1,0 +1,498 @@
+max.lik.trees <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)
+max.lik.trees
+max.lik.lines <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1]
+max.lik.lines
+max.lik.lines <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1]+1
+max.lik.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1
+max.lik.lines
+cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENCUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1
+unlist(strsplit(system(paste(c("grep -n CONSENCUS ", dat), collapse=""), intern=TRUE), split=":"))
+unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":"))
+cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=4, byrow=TRUE)[,1])+1
+cons.lines
+max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)
+max.lik.stats
+unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" "))
+max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)
+max.lik.stats
+setwd("~/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline")#
+dat <- "partitioning_treebuilding_output.txt"#
+#
+search.algo <- matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3]#
+scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4]#
+partitions <- matrix( unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="= ")), ncol=2, byrow=TRUE)[,2]#
+#
+max.lik.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1#
+max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,29,31,36,38,42,44,52,58)]#
+cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=4, byrow=TRUE)[,1])+1
+out.dat <- data.frame(cbind(search.algo, scheme.criteria, partitions))
+out.dat
+max.lik.lines
+max.lik.stats
+max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,29,38,44,52,58)]
+out.dat <- data.frame(cbind(search.algo, scheme.criteria, partitions, max.lik.stats))
+names(out.dat) <- c("search.algo", "part.log.lik", "part.IC", "part.IC.score", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens")
+max.lik.stats
+max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,29,31,36,38,42,44,52,58)]
+max.lik.stats
+max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)]
+max.lik.stats
+out.dat <- data.frame(cbind(search.algo, scheme.criteria, partitions, max.lik.stats))
+names(out.dat) <- c("search.algo", "part.log.lik", "part.IC", "part.IC.score", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens")
+out.dat
+scheme.criteria
+strsplit(scheme.criteria, split=": ")
+unlist(strsplit(scheme.criteria, split=": "))
+matrix(unlist(strsplit(scheme.criteria, split=": ")), ncol=2, byrow=TRUE)
+scheme.criteria <- matrix(unlist(strsplit(matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4], split=": ")), ncol=2, byrow=TRUE)
+scheme.criteria
+scheme.criteria <- matrix(unlist(strsplit(matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4], split=": ")), ncol=4, byrow=TRUE)
+scheme.criteria
+unlist(strsplit(scheme.criteria, split=": "))
+matrix(unlist(strsplit(scheme.criteria, split=": ")), ncol=4, byrow=TRUE)
+lapply(scheme.criteria, str.split, ":")
+lapply(scheme.criteria, strsplit, ":")
+unlist(lapply(scheme.criteria, strsplit, ":"))
+matrix(unlist(lapply(scheme.criteria, strsplit, ":")),ncol=4, byrow=TRUE)
+scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4], split=": "))
+scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4]
+scheme.criteria
+part.log.lik <- strsplit(scheme.criteria, split=": ")
+part.log.lik
+scheme.criteria
+part.log.lik <- strsplit(scheme.criteria[,1], split=": ")
+part.log.lik
+part.log.lik <- matrix(unlist(strsplit(scheme.criteria[,1], split=": ")), ncol=2, byrow=TRUE)
+part.log.lik
+part.log.lik <- matrix(unlist(strsplit(scheme.criteria[,1], split=": ")), ncol=2, byrow=TRUE)[,2]
+part.log.lik
+part.log.lik <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,1], split=": ")), ncol=2, byrow=TRUE)[,2])
+part.log.lik
+matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)
+part.IC <- matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,1]
+part.IC
+part.IC.score as.numeric(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,2])
+part.IC.score
+part.IC.score  <-as.numeric(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,2])
+part.IC.score
+out.dat <- data.frame(cbind(search.algo, part.log.lik, part.IC, part.IC.score, partitions, max.lik.stats))
+names(out.dat) <- c("search.algo", "part.log.lik", "part.IC", "part.IC.score", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens")
+out.dat
+max.lik.tree <- dat[max.lik.lines,]
+max.lik.lines
+class(dat)
+dim(dat)
+length(dat)
+dat
+cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)
+unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" "))
+cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)
+cons.stats
+cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)]
+cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)]
+cons.stats
+cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)]
+out.dat <- data.frame(cbind(search.algo, part.log.lik, part.IC, part.IC.score, partitions, max.lik.stats, cons.stats))
+names(out.dat) <- c("search.algo", "part.log.lik", "part.IC", "part.IC.score", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens", "cons.log.lik", "cons.max.RF.dist")
+out.dat
+con <- file(dat, open = "r")
+con
+line <- readLines(con, 5)
+line
+?readLines
+class(line)
+length(line)
+line[length(line)]
+tree.line <- line[length(line)]
+tree.line
+max.lik.lines
+max.lik.trees <- rep(NA, length(max.lik.lines))#
+con <- file(dat, open = "r")#
+it <- 1#
+for(i in max.lik.lines){#
+	line <- readLines(con, i)#
+	tree.line <- line[length(line)]#
+	max.lik.trees[] <- tree.line#
+	it <- it + 1#
+}#
+close(con)
+max.lik.trees
+class(max.lik.trees)
+length(max.lik.trees)
+max.lik.trees <- rep(NA, length(max.lik.lines))#
+con <- file(dat, open = "r")#
+it <- 1#
+for(i in max.lik.lines){#
+	line <- readLines(con, i)#
+	tree.line <- line[length(line)]#
+	max.lik.trees[it] <- tree.line#
+	it <- it + 1#
+}#
+close(con)
+max.lik.trees
+as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])
+tree.line
+max.lik.trees <- rep(NA, length(max.lik.lines))
+max.lik.trees
+max.lik.lines
+max.lik.trees <- rep(NA, length(max.lik.lines))#
+con <- file(dat, open = "r")#
+it <- 1#
+for(i in max.lik.lines){#
+	line <- readLines(con, i)#
+	tree.line <- line[length(line)]#
+	max.lik.trees[it] <- tree.line#
+	it <- it + 1#
+}#
+close(con)
+max.lik.trees
+max.lik.trees[1]
+max.lik.trees[2]
+max.lik.trees[3]
+max.lik.lines
+max.lik.trees <- rep(NA, length(max.lik.lines))#
+con <- file(dat, open = "r")#
+it <- 1#
+for(i in max.lik.lines){#
+	print(i)#
+	line <- readLines(con, i)#
+	tree.line <- line[length(line)]#
+	max.lik.trees[it] <- tree.line#
+	it <- it + 1#
+}#
+close(con)
+line
+tree.line <- line[length(line)]
+length(line)
+i
+i <- 17
+line <- readLines(con, i)
+line
+close(con)
+con <- file(dat, open = "r")
+i
+line <- readLines(con, i)
+line
+length(line)
+tree.line <- line[length(line)]
+tree.line
+it
+close(con)
+max.lik.trees <- rep(NA, length(max.lik.lines))#
+con <- file(dat, open = "r")#
+it <- 1#
+for(i in max.lik.lines){#
+	print(i)#
+	line <- readLines(con, i)#
+	tree.line <- line[length(line)]#
+	max.lik.trees[it] <- tree.line#
+	it <- it + 1#
+}#
+close(con)
+max.lik.trees
+i <- 1
+i <- 11
+con <- file(dat, open = "r")
+it <- 1
+print(i)
+line <- readLines(con, i)
+line
+length(line)
+i
+tree.line <- line[i]
+tree.line
+close(con)
+max.lik.trees <- rep(NA, length(max.lik.lines))
+max.lik.trees
+con <- file(dat, open = "r")#
+it <- 1#
+for(i in max.lik.lines){#
+	print(i)#
+	line <- readLines(con, i)#
+	tree.line <- line[i]#
+	max.lik.trees[it] <- tree.line#
+	it <- it + 1#
+}#
+close(con)
+max.lik.trees
+it
+max.lik.trees <- rep(NA, length(max.lik.lines))#
+it <- 1#
+for(i in max.lik.lines){#
+	print(i)#
+	con <- file(dat, open = "r")#
+	line <- readLines(con, i)#
+	close(con)#
+	tree.line <- line[i]#
+	max.lik.trees[it] <- tree.line#
+	it <- it + 1#
+}
+max.lik.trees
+cons.lines
+cons.trees <- rep(NA, length(cons.lines))#
+it <- 1#
+for(i in cons.lines){#
+	con <- file(dat, open = "r")#
+	line <- readLines(con, i)#
+	close(con)#
+	tree.line <- line[i]#
+	cons.trees[it] <- tree.line#
+	it <- it + 1#
+}
+cons.trees
+out.dat <- data.frame(cbind(search.algo, part.log.lik, part.IC, part.IC.score, partitions, max.lik.stats, cons.stats, max.lik.trees, cons.trees))
+names(out.dat) <- c("search.algo", "part.log.lik", "part.IC", "part.IC.score", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens", "cons.log.lik", "cons.max.RF.dist", "max.lik.tree", "consen.tree")
+out.dat
+search.algo
+search.algo <- c(search.algo, "none")
+search.algo
+part.log.lik
+out.dat
+i
+it
+it <- 2
+paste(c("tree", search.algo[it], part.IC[it], ".nwk")
+)
+paste(c("tree_", search.algo[it], part.IC[it], ".nwk"), collapse="")
+paste(c("tree_", trimws(search.algo[it]), trimws(part.IC[it]), ".nwk"), collapse="")
+search.algo
+trimws(search.algo)
+matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3]
+trimws(matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3])
+paste(c("tree_", search.algo[it], part.IC[it], ".nwk"), collapse="")
+search.algo <- trimws(matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3])
+search.algo <- c(search.algo, "none")
+paste(c("tree_", search.algo[it], part.IC[it], ".nwk"), collapse="")
+search.algo
+part.IC
+out.dat
+search.algo
+part.log.lik
+part.IC
+part.IC.score
+partitions
+max.lik.stats
+max.lik.stats <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)])
+max.lik.stats
+cons.stats
+setwd("~/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline")#
+dat <- "partitioning_treebuilding_output.txt"#
+#
+search.algo <- trimws(matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3])#
+scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4]#
+part.log.lik <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,1], split=": ")), ncol=2, byrow=TRUE)[,2])#
+part.IC <- trimws(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,1])#
+part.IC.score <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,2])#
+partitions <- matrix( unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="= ")), ncol=2, byrow=TRUE)[,2]#
+#
+max.lik.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1#
+max.lik.stats <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)])#
+#
+cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=4, byrow=TRUE)[,1])+1#
+cons.stats <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)])
+search.algo <- c(search.algo, "none")#
+part.log.lik <- c(part.log.lik, "_")#
+part.IC <- c(part.IC, "_")#
+part.IC.score <- c(part.IC.score, "_")#
+partitions <- c(partitions, "_")
+search.algo
+part.log.lik
+part.log.lik <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,1], split=": ")), ncol=2, byrow=TRUE)[,2])
+part.log.lik
+part.log.lik <- c(part.log.lik, NA)
+part.log.lik
+part.IC
+dat <- "partitioning_treebuilding_output.txt"#
+#
+search.algo <- trimws(matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3])#
+scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4]#
+part.log.lik <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,1], split=": ")), ncol=2, byrow=TRUE)[,2])#
+part.IC <- trimws(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,1])#
+part.IC.score <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,2])#
+partitions <- matrix( unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="= ")), ncol=2, byrow=TRUE)[,2]#
+#
+max.lik.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1#
+max.lik.stats <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)])#
+#
+cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=4, byrow=TRUE)[,1])+1#
+cons.stats <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)])
+part.IC
+part.IC <- c(part.IC, NA)
+part.IC
+part.IC.score <- c(part.IC.score, NA)
+part.IC.score
+partitions <- c(partitions, NA)
+partitions <- c(partitions, NA)
+partitions
+class(partitions)
+max.lik.trees
+paste(c("tree_", search.algo[it], part.IC[it], ".nwk"), collapse="")
+getwd()
+cons.trees <- rep(NA, length(cons.lines))#
+it <- 1#
+for(i in cons.lines){#
+	con <- file(dat, open = "r")#
+	line <- readLines(con, i)#
+	close(con)#
+	tree.line <- line[i]#
+	cons.trees[it] <- tree.line#
+	write(tree.line, file=paste(c("AnalysisResults/tree_", search.algo[it], part.IC[it], ".nwk"), collapse=""))#
+	it <- it + 1#
+}
+setwd("~/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline")#
+dat <- "partitioning_treebuilding_output.txt"#
+#
+search.algo <- trimws(matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3])#
+scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4]#
+part.log.lik <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,1], split=": ")), ncol=2, byrow=TRUE)[,2])#
+part.IC <- trimws(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,1])#
+part.IC.score <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,2])#
+partitions <- matrix( unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="= ")), ncol=2, byrow=TRUE)[,2]#
+#
+max.lik.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1#
+max.lik.stats <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)])#
+#
+cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=4, byrow=TRUE)[,1])+1#
+cons.stats <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)])#
+# add on the no partitioning output:#
+search.algo <- c(search.algo, "none")#
+part.log.lik <- c(part.log.lik, NA)#
+part.IC <- c(part.IC, NA)#
+part.IC.score <- c(part.IC.score, NA)#
+partitions <- c(partitions, NA)#
+max.lik.trees <- rep(NA, length(max.lik.lines))#
+it <- 1#
+for(i in max.lik.lines){#
+	con <- file(dat, open = "r")#
+	line <- readLines(con, i)#
+	close(con)#
+	tree.line <- line[i]#
+	max.lik.trees[it] <- tree.line#
+	write(tree.line, file=paste(c("AnalysisResults/maxtree_", search.algo[it], part.IC[it], ".nwk"), collapse=""))#
+	it <- it + 1#
+}#
+cons.trees <- rep(NA, length(cons.lines))#
+it <- 1#
+for(i in cons.lines){#
+	con <- file(dat, open = "r")#
+	line <- readLines(con, i)#
+	close(con)#
+	tree.line <- line[i]#
+	cons.trees[it] <- tree.line#
+	write(tree.line, file=paste(c("AnalysisResults/constree_", search.algo[it], part.IC[it], ".nwk"), collapse=""))#
+	it <- it + 1#
+}#
+out.dat <- data.frame(cbind(search.algo, part.log.lik, part.IC, part.IC.score, partitions, max.lik.stats, cons.stats, max.lik.trees, cons.trees))#
+names(out.dat) <- c("search.algo", "part.log.lik", "part.IC", "part.IC.score", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens", "cons.log.lik", "cons.max.RF.dist", "max.lik.tree", "consen.tree")
+search.algo
+part.log.lik
+part.IC
+part.IC.score
+partitions
+max.lik.stats
+matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)]
+as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)])
+max.lik.stats <- matrix(as.numeric(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)])
+unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" "))
+matrix(as.numeric(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)]
+)
+matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)]
+max.lik.lines
+max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)]
+max.lik.stats
+cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=4, byrow=TRUE)[,1])+1
+cons.lines
+cons.stats <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)])
+cons.stats
+cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)]
+cons.stats
+setwd("~/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline")#
+dat <- "partitioning_treebuilding_output.txt"#
+#
+search.algo <- trimws(matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3])#
+scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4]#
+part.log.lik <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,1], split=": ")), ncol=2, byrow=TRUE)[,2])#
+part.IC <- trimws(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,1])#
+part.IC.score <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,2])#
+partitions <- matrix( unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="= ")), ncol=2, byrow=TRUE)[,2]#
+#
+max.lik.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1#
+max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)]#
+#
+cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=4, byrow=TRUE)[,1])+1#
+cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)]#
+# add on the no partitioning output:#
+search.algo <- c(search.algo, "none")#
+part.log.lik <- c(part.log.lik, NA)#
+part.IC <- c(part.IC, NA)#
+part.IC.score <- c(part.IC.score, NA)#
+partitions <- c(partitions, NA)#
+max.lik.trees <- rep(NA, length(max.lik.lines))#
+it <- 1#
+for(i in max.lik.lines){#
+	con <- file(dat, open = "r")#
+	line <- readLines(con, i)#
+	close(con)#
+	tree.line <- line[i]#
+	max.lik.trees[it] <- tree.line#
+	write(tree.line, file=paste(c("AnalysisResults/maxtree_", search.algo[it], part.IC[it], ".nwk"), collapse=""))#
+	it <- it + 1#
+}#
+cons.trees <- rep(NA, length(cons.lines))#
+it <- 1#
+for(i in cons.lines){#
+	con <- file(dat, open = "r")#
+	line <- readLines(con, i)#
+	close(con)#
+	tree.line <- line[i]#
+	cons.trees[it] <- tree.line#
+	write(tree.line, file=paste(c("AnalysisResults/constree_", search.algo[it], part.IC[it], ".nwk"), collapse=""))#
+	it <- it + 1#
+}
+out.dat <- data.frame(cbind(search.algo, part.log.lik, part.IC, part.IC.score, partitions, max.lik.stats, cons.stats, max.lik.trees, cons.trees))
+partitions
+max.lik.stats
+cons.stats
+max.lik.trees
+setwd("~/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline")#
+dat <- "partitioning_treebuilding_output.txt"#
+#
+search.algo <- trimws(matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3])#
+scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4]#
+part.log.lik <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,1], split=": ")), ncol=2, byrow=TRUE)[,2])#
+part.IC <- trimws(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,1])#
+part.IC.score <- as.numeric(matrix(unlist(strsplit(scheme.criteria[,2], split=": ")), ncol=2, byrow=TRUE)[,2])#
+partitions <- matrix( unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="= ")), ncol=2, byrow=TRUE)[,2]#
+#
+max.lik.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1#
+max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,31,38,44,52,58)]#
+#
+cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=4, byrow=TRUE)[,1])+1#
+cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)]
+max.lik.trees <- rep(NA, length(max.lik.lines))#
+it <- 1#
+for(i in max.lik.lines){#
+	con <- file(dat, open = "r")#
+	line <- readLines(con, i)#
+	close(con)#
+	tree.line <- line[i]#
+	max.lik.trees[it] <- tree.line#
+	write(tree.line, file=paste(c("AnalysisResults/maxtree_", search.algo[it], part.IC[it], ".nwk"), collapse=""))#
+	it <- it + 1#
+}#
+cons.trees <- rep(NA, length(cons.lines))#
+it <- 1#
+for(i in cons.lines){#
+	con <- file(dat, open = "r")#
+	line <- readLines(con, i)#
+	close(con)#
+	tree.line <- line[i]#
+	cons.trees[it] <- tree.line#
+	write(tree.line, file=paste(c("AnalysisResults/constree_", search.algo[it], part.IC[it], ".nwk"), collapse=""))#
+	it <- it + 1#
+}#
+out.dat <- data.frame(cbind(search.algo, part.log.lik, part.IC, part.IC.score, partitions, max.lik.stats, cons.stats, max.lik.trees, cons.trees))#
+names(out.dat) <- c("search.algo", "part.log.lik", "part.IC", "part.IC.score", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens", "cons.log.lik", "cons.max.RF.dist", "max.lik.tree", "consen.tree")
+out.dat
+write(out.dat, file="AnalysisResults_AllStats.csv")
+write.csv(out.dat, file="AnalysisResults/AllStatsOutput.csv")

@@ -77,7 +77,7 @@ def rf_distance(tree1,tree2,option=False):
 
 
 ## EXTRACT THE INFERRED TREES FROM THE OUTPUT FILE
-
+Rscript ExtractOutputs_Partitioning.R
 
 
 #________________________________________________________________________________________#

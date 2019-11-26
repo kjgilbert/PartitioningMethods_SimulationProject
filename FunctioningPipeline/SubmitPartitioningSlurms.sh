@@ -14,10 +14,6 @@ ${curr_path}SetupAndSimulate.sh $curr_path $run_path
 
 ######### DO ALL THE PARTITIONING AND IQTREE analyses
 
-pop_size=10000
-
-basedirname=SlimTestJan21_
-
 
 ### s = -0.001
 

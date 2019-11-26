@@ -71,5 +71,5 @@ done
 
 # make config files for partitionfinder
 ${curr_path}MakeConfigs.sh $curr_path $run_path
-
+echo "config and slurm files done"
 

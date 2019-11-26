@@ -31,6 +31,7 @@ echo "reformatting done to phylip files"
 
 
 # make all the directories and put the files in the right place for running partitionfinder and iqtree
+# MAKE ALSO THE SLURM FILES!
 
 input_folder=$curr_path'sampledMSAs/'
 files=${input_folder}*.phy
@@ -68,5 +69,7 @@ for f in $files;
 done
 
 
+# make config files for partitionfinder
+${curr_path}MakeConfigs.sh $curr_path $run_path
 
 

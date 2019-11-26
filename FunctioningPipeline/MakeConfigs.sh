@@ -1,8 +1,7 @@
+#!/bin/bash
+
 current_path=$1
 run_path=$2
-input_folder=$current_path'sampledMSAs/'
-files=${input_folder}*.phy
-
 
 # put the cfg file in each corresponding directory
 
@@ -67,12 +66,28 @@ search = greedy;
 '
 
 
+slurm_string_1=$'#!/bin/bash
+#SBATCH --mail-user=kimberly.gilbert@unil.ch
+#SBATCH --mail-type=fail
+#SBATCH --job-name="'
+slurm_string_2=$'"
+#SBATCH --workdir=.
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=4G
+#SBATCH --time=5-00:00
+#SBATCH --partition=long
+#SBATCH --account=cdessim2_default
 
+touch partitioning_treebuilding_output.txt
 
-
-
+source /scratch/wally/FAC/FBM/DBC/cdessim2/default/kgilbert/miniconda3/etc/profile.d/conda.sh
+conda activate my_python2
+'
 
 #________go through each gene sample size set________#
+
+input_folder=$current_path'sampledMSAs/'
+files=${input_folder}*.phy
 
 
 for f in $files;
@@ -103,12 +118,124 @@ for f in $files;
     done <$gene_sites_file
 
     # put all the strings together into the final .cfg file
-    echo "$aic_string" "$gene_string" "$rcluster_string" > 'partition_finder_N'$raw_samp'_raxml_aic.cfg'
-    echo "$aic_string" "$gene_string" "$greedy_string" > 'partition_finder_N'$raw_samp'_greedy_aic.cfg'
-    echo "$bic_string" "$gene_string" "$rcluster_string" > 'partition_finder_N'$raw_samp'_raxml_bic.cfg'
-    echo "$bic_string" "$gene_string" "$greedy_string" > 'partition_finder_N'$raw_samp'_greedy_bic.cfg'
-    echo "$aicc_string" "$gene_string" "$rcluster_string" > 'partition_finder_N'$raw_samp'_raxml_aicc.cfg'
-    echo "$aicc_string" "$gene_string" "$greedy_string" > 'partition_finder_N'$raw_samp'_greedy_aicc.cfg'
+    echo "$aic_string" "$gene_string" "$rcluster_string" > ${curr_path}'part_N'$raw_samp'_'$species'_r-a/partition_finder.cfg'
+    echo "$aic_string" "$gene_string" "$greedy_string" > ${curr_path}'part_N'$raw_samp'_'$species'_g-a/partition_finder.cfg'
+    echo "$bic_string" "$gene_string" "$rcluster_string" > ${curr_path}'part_N'$raw_samp'_'$species'_r-b/partition_finder.cfg'
+    echo "$bic_string" "$gene_string" "$greedy_string" > ${curr_path}'part_N'$raw_samp'_'$species'_g-b/partition_finder.cfg'
+    echo "$aicc_string" "$gene_string" "$rcluster_string" > ${curr_path}'part_N'$raw_samp'_'$species'_r-c/partition_finder.cfg'
+    echo "$aicc_string" "$gene_string" "$greedy_string" > ${curr_path}'part_N'$raw_samp'_'$species'_g-c/partition_finder.cfg'
+
+	# make slurm run files for each as well
+
+	echo "$slurm_string_1"$raw_samp"_"$species'_r-a'"$slurm_string_2" > ${curr_path}'part_N'$raw_samp'_'$species'_r-a/Run.slurm'
+	echo "$slurm_string_1"$raw_samp"_"$species'_g-a'"$slurm_string_2" > ${curr_path}'part_N'$raw_samp'_'$species'_g-a/Run.slurm'
+	echo "$slurm_string_1"$raw_samp"_"$species'_r-b'"$slurm_string_2" > ${curr_path}'part_N'$raw_samp'_'$species'_r-b/Run.slurm'
+	echo "$slurm_string_1"$raw_samp"_"$species'_g-b'"$slurm_string_2" > ${curr_path}'part_N'$raw_samp'_'$species'_g-b/Run.slurm'
+	echo "$slurm_string_1"$raw_samp"_"$species'_r-c'"$slurm_string_2" > ${curr_path}'part_N'$raw_samp'_'$species'_r-c/Run.slurm'
+	echo "$slurm_string_1"$raw_samp"_"$species'_g-c'"$slurm_string_2" > ${curr_path}'part_N'$raw_samp'_'$species'_g-c/Run.slurm'
+
+
+	# raxml AIC
+	echo "python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' ${curr_path}'part_N'$raw_samp'_'$species'_r-a/' --raxml -p 4
+conda deactivate
+# copy nexus best scheme to a partition file
+awk '/nexus/,/end/' ${curr_path}'part_N'$raw_samp'_'$species'_r-a/analysis/best_scheme.txt' > ${curr_path}'part_N'$raw_samp'_'$species'_r-a/best_scheme_nexus.txt'
+# save information criteria output from partition finder
+echo $species'_'$raw_samp'_raxml-aic' >> partitioning_treebuilding_output.txt
+echo $(grep search ${curr_path}'part_N'$raw_samp'_'$species'_r-a/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+echo $(grep Scheme ${curr_path}'part_N'$raw_samp'_'$species'_r-a/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+
+#________run iqtree with partition file - raxml aic________#
+$run_path'iqtree-1.6.12-Linux/bin/iqtree' -s ${curr_path}'part_N'$raw_samp'_'$species'_r-a/temp_align.phy' -seed 123456789 -nt 4 -spp ${curr_path}'part_N'$raw_samp'_'$species'_r-a/best_scheme_nexus.txt' -bb 1000
+echo $(grep -A 12 MAXIMUM ${curr_path}'part_N'$raw_samp'_'$species'_r-a/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_r-a/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
+echo $(grep -A 5 CONSENSUS ${curr_path}'part_N'$raw_samp'_'$species'_r-a/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_r-a/best_scheme_nexus.txt.iqtree' | tail -n 1) >> partitioning_treebuilding_output.txt" >> ${curr_path}'part_N'$raw_samp'_'$species'_r-a/Run.slurm'
+
+	# raxml BIC
+	echo "python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' ${curr_path}'part_N'$raw_samp'_'$species'_r-b/' --raxml -p 4
+conda deactivate
+# copy nexus best scheme to a partition file
+awk '/nexus/,/end/' ${curr_path}'part_N'$raw_samp'_'$species'_r-b/analysis/best_scheme.txt' > ${curr_path}'part_N'$raw_samp'_'$species'_r-b/best_scheme_nexus.txt'
+# save information criteria output from partition finder
+echo $species'_'$raw_samp'_raxml-bic' >> partitioning_treebuilding_output.txt
+echo $(grep search ${curr_path}'part_N'$raw_samp'_'$species'_r-b/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+echo $(grep Scheme ${curr_path}'part_N'$raw_samp'_'$species'_r-b/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+
+#________run iqtree with partition file - raxml aic________#
+$run_path'iqtree-1.6.12-Linux/bin/iqtree' -s ${curr_path}'part_N'$raw_samp'_'$species'_r-b/temp_align.phy' -seed 123456789 -nt 4 -spp ${curr_path}'part_N'$raw_samp'_'$species'_r-b/best_scheme_nexus.txt' -bb 1000
+echo $(grep -A 12 MAXIMUM ${curr_path}'part_N'$raw_samp'_'$species'_r-b/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_r-b/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
+echo $(grep -A 5 CONSENSUS ${curr_path}'part_N'$raw_samp'_'$species'_r-b/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_r-b/best_scheme_nexus.txt.iqtree' | tail -n 1) >> partitioning_treebuilding_output.txt" >> ${curr_path}'part_N'$raw_samp'_'$species'_r-b/Run.slurm'
+
+	# raxml AICc
+	echo "python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' ${curr_path}'part_N'$raw_samp'_'$species'_r-c/' --raxml -p 4
+conda deactivate
+# copy nexus best scheme to a partition file
+awk '/nexus/,/end/' ${curr_path}'part_N'$raw_samp'_'$species'_r-c/analysis/best_scheme.txt' > ${curr_path}'part_N'$raw_samp'_'$species'_r-c/best_scheme_nexus.txt'
+# save information criteria output from partition finder
+echo $species'_'$raw_samp'_raxml-aicc' >> partitioning_treebuilding_output.txt
+echo $(grep search ${curr_path}'part_N'$raw_samp'_'$species'_r-c/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+echo $(grep Scheme ${curr_path}'part_N'$raw_samp'_'$species'_r-c/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+
+#________run iqtree with partition file - raxml aic________#
+$run_path'iqtree-1.6.12-Linux/bin/iqtree' -s ${curr_path}'part_N'$raw_samp'_'$species'_r-c/temp_align.phy' -seed 123456789 -nt 4 -spp ${curr_path}'part_N'$raw_samp'_'$species'_r-c/best_scheme_nexus.txt' -bb 1000
+echo $(grep -A 12 MAXIMUM ${curr_path}'part_N'$raw_samp'_'$species'_r-c/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_r-c/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
+echo $(grep -A 5 CONSENSUS ${curr_path}'part_N'$raw_samp'_'$species'_r-c/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_r-c/best_scheme_nexus.txt.iqtree' | tail -n 1) >> partitioning_treebuilding_output.txt" >> ${curr_path}'part_N'$raw_samp'_'$species'_r-c/Run.slurm'
+
+	# greedy AIC
+	echo "python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' ${curr_path}'part_N'$raw_samp'_'$species'_g-a/' -p 4
+conda deactivate
+# copy nexus best scheme to a partition file
+awk '/nexus/,/end/' ${curr_path}'part_N'$raw_samp'_'$species'_g-a/analysis/best_scheme.txt' > ${curr_path}'part_N'$raw_samp'_'$species'_g-a/best_scheme_nexus.txt'
+# save information criteria output from partition finder
+echo $species'_'$raw_samp'_greedy-aic' >> partitioning_treebuilding_output.txt
+echo $(grep search ${curr_path}'part_N'$raw_samp'_'$species'_g-a/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+echo $(grep Scheme ${curr_path}'part_N'$raw_samp'_'$species'_g-a/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+
+#________run iqtree with partition file - raxml aic________#
+$run_path'iqtree-1.6.12-Linux/bin/iqtree' -s ${curr_path}'part_N'$raw_samp'_'$species'_g-a/temp_align.phy' -seed 123456789 -nt 4 -spp ${curr_path}'part_N'$raw_samp'_'$species'_g-a/best_scheme_nexus.txt' -bb 1000
+echo $(grep -A 12 MAXIMUM ${curr_path}'part_N'$raw_samp'_'$species'_g-a/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_g-a/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
+echo $(grep -A 5 CONSENSUS ${curr_path}'part_N'$raw_samp'_'$species'_g-a/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_g-a/best_scheme_nexus.txt.iqtree' | tail -n 1) >> partitioning_treebuilding_output.txt" >> ${curr_path}'part_N'$raw_samp'_'$species'_g-a/Run.slurm'
+
+	# greedy BIC
+	echo "python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' ${curr_path}'part_N'$raw_samp'_'$species'_g-b/' -p 4
+conda deactivate
+# copy nexus best scheme to a partition file
+awk '/nexus/,/end/' ${curr_path}'part_N'$raw_samp'_'$species'_g-b/analysis/best_scheme.txt' > ${curr_path}'part_N'$raw_samp'_'$species'_g-b/best_scheme_nexus.txt'
+# save information criteria output from partition finder
+echo $species'_'$raw_samp'_greedy-bic' >> partitioning_treebuilding_output.txt
+echo $(grep search ${curr_path}'part_N'$raw_samp'_'$species'_g-b/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+echo $(grep Scheme ${curr_path}'part_N'$raw_samp'_'$species'_g-b/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+
+#________run iqtree with partition file - raxml aic________#
+$run_path'iqtree-1.6.12-Linux/bin/iqtree' -s ${curr_path}'part_N'$raw_samp'_'$species'_g-b/temp_align.phy' -seed 123456789 -nt 4 -spp ${curr_path}'part_N'$raw_samp'_'$species'_g-b/best_scheme_nexus.txt' -bb 1000
+echo $(grep -A 12 MAXIMUM ${curr_path}'part_N'$raw_samp'_'$species'_g-b/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_g-b/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
+echo $(grep -A 5 CONSENSUS ${curr_path}'part_N'$raw_samp'_'$species'_g-b/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_g-b/best_scheme_nexus.txt.iqtree' | tail -n 1) >> partitioning_treebuilding_output.txt" >> ${curr_path}'part_N'$raw_samp'_'$species'_g-b/Run.slurm'
+
+	# greedy AICc
+	echo "python $run_path'partitionfinder-2.1.1/PartitionFinderProtein.py' ${curr_path}'part_N'$raw_samp'_'$species'_g-c/' -p 4
+conda deactivate
+# copy nexus best scheme to a partition file
+awk '/nexus/,/end/' ${curr_path}'part_N'$raw_samp'_'$species'_g-c/analysis/best_scheme.txt' > ${curr_path}'part_N'$raw_samp'_'$species'_g-c/best_scheme_nexus.txt'
+# save information criteria output from partition finder
+echo $species'_'$raw_samp'_greedy-aicc' >> partitioning_treebuilding_output.txt
+echo $(grep search ${curr_path}'part_N'$raw_samp'_'$species'_g-c/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+echo $(grep Scheme ${curr_path}'part_N'$raw_samp'_'$species'_g-c/analysis/best_scheme.txt') >> partitioning_treebuilding_output.txt
+
+#________run iqtree with partition file - raxml aic________#
+$run_path'iqtree-1.6.12-Linux/bin/iqtree' -s ${curr_path}'part_N'$raw_samp'_'$species'_g-c/temp_align.phy' -seed 123456789 -nt 4 -spp ${curr_path}'part_N'$raw_samp'_'$species'_g-c/best_scheme_nexus.txt' -bb 1000
+echo $(grep -A 12 MAXIMUM ${curr_path}'part_N'$raw_samp'_'$species'_g-c/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_g-c/best_scheme_nexus.txt.iqtree' | head -n 3 | tail -n 1) >> partitioning_treebuilding_output.txt
+echo $(grep -A 5 CONSENSUS ${curr_path}'part_N'$raw_samp'_'$species'_g-c/best_scheme_nexus.txt.iqtree') >> partitioning_treebuilding_output.txt
+echo $(grep -A 2 newick ${curr_path}'part_N'$raw_samp'_'$species'_g-c/best_scheme_nexus.txt.iqtree' | tail -n 1) >> partitioning_treebuilding_output.txt" >> ${curr_path}'part_N'$raw_samp'_'$species'_g-c/Run.slurm'
 
 
 done

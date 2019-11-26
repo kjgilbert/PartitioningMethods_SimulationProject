@@ -7,7 +7,7 @@ inDir=$1'sampledMSAs/'
 
 for i in ${inDir}*.phy;
     do
-echo $i
+#echo $i
     sed "s/.\{10\}/& /" $i > temp_phylip.txt
     cp temp_phylip.txt $i
 done

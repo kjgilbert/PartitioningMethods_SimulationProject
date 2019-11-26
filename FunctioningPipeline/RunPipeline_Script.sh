@@ -12,8 +12,8 @@ mkdir ${curr_path}'part_N80'
 
 
 # do the sims
-#${run_path}ALF_standalone/bin/alfsim alf-params_lopho.drw
-#${run_path}ALF_standalone/bin/alfsim alf-params_myria.drw
+${run_path}ALF_standalone/bin/alfsim alf-params_lopho.drw
+${run_path}ALF_standalone/bin/alfsim alf-params_myria.drw
 echo "alf simulation complete"
 
 # make a concatenated MSA of output genes
@@ -36,3 +36,15 @@ conda activate my_python2
 ${curr_path}PartitionMSAs.sh $curr_path $run_path
 conda deactivate
 echo "full analysis complete"
+
+# compare the trees and summarize the output
+${curr_path}Reformat_RealTree.sh
+echo "real trees output from alf naming convention made to match inferred trees"
+
+Rscript ${curr_path}ExtractOutputs_Partitioning.R
+echo "outputs summarized into table and output tree newick files created"
+
+conda activate my_python3
+python ${run_path}OutputAnalysis_RF-Euc.py
+conda deactivate
+echo "RF and Euclidean distances calculated"

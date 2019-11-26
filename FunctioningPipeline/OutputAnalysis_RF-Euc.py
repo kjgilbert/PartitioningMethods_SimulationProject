@@ -30,7 +30,7 @@ def rf_distance(tree1,tree2,option=False):
         t2 = collapse_branches(tree2,0.75)
         option = 'reduced'
     else:
-        t1 = tree1 #Tree(tree1)
+        t1 = tree1 #Tree(tree1) because I import the trees from files outside this function
         t2 = tree2 #Tree(tree2)
 
     t1.unroot()
@@ -73,34 +73,104 @@ def rf_distance(tree1,tree2,option=False):
 
 
 ## REFORMAT THE IDs IN THE REAL TREE SO FOLLOWING COMPARISONS WILL WORK
-
+## HAPPENS IN BASH RunPipeline_Script.sh
 
 
 ## EXTRACT THE INFERRED TREES FROM THE OUTPUT FILE
-Rscript ExtractOutputs_Partitioning.R
+## HAPPENS IN BASH RunPipeline_Script.sh
 
 
 #________________________________________________________________________________________#
 
 # analyses on the outputs, using the above functions:
 
-real_tree = Tree("AnalysisResults/modified_RealTree.nwk")
+## LOPHOTROCHOZOA
+real_tree_lopho = Tree("AnalysisResults/RealTree_lopho.nwk")
 
-inferred_tree_partAIC_rclust = Tree("AnalysisResults/tree_rcluster_AIC_part.nwk")
-inferred_tree_partAICc_rclust = Tree("AnalysisResults/tree_rcluster_AICc_part.nwk")
-inferred_tree_partBIC_rclust = Tree("AnalysisResults/tree_rcluster_BIC_part.nwk")
+# rclust
+inferred_cons_tree_lopho_partAIC_rclust = Tree("AnalysisResults/constree_lopho_rclusterAIC.nwk")
+inferred_max_tree_lopho_partAIC_rclust = Tree("AnalysisResults/maxtree_lopho_rclusterAIC.nwk")
 
-inferred_tree_partAIC_greedy = Tree("AnalysisResults/tree_greedyAIC_part.nwk")
-inferred_tree_partAICc_greedy = Tree("AnalysisResults/tree_greedyAICc_part.nwk")
-inferred_tree_partBIC_greedy = Tree("AnalysisResults/tree_greedyBIC_part.nwk")
+inferred_cons_tree_lopho_partAICc_rclust = Tree("AnalysisResults/constree_lopho_rclusterAICc.nwk")
+inferred_max_tree_lopho_partAICc_rclust = Tree("AnalysisResults/maxtree_lopho_rclusterAICc.nwk")
 
-inferred_tree_noPart = Tree("AnalysisResults/tree_noPart.nwk")
+inferred_cons_tree_lopho_partBIC_rclust = Tree("AnalysisResults/constree_lopho_rclusterBIC.nwk")
+inferred_max_tree_lopho_partBIC_rclust = Tree("AnalysisResults/maxtree_lopho_rclusterBIC.nwk")
+
+#greedy
+inferred_cons_tree_lopho_partAIC_greedy = Tree("AnalysisResults/constree_lopho_greedyAIC.nwk")
+inferred_max_tree_lopho_partAIC_greedy = Tree("AnalysisResults/maxtree_lopho_greedyAIC.nwk")
+
+inferred_cons_tree_lopho_partAICc_greedy = Tree("AnalysisResults/constree_lopho_greedyAICc.nwk")
+inferred_max_tree_lopho_partAICc_greedy = Tree("AnalysisResults/maxtree_lopho_greedyAICc.nwk")
+
+inferred_cons_tree_lopho_partBIC_greedy = Tree("AnalysisResults/constree_lopho_greedyBIC.nwk")
+inferred_max_tree_lopho_partBIC_greedy = Tree("AnalysisResults/maxtree_lopho_greedyBIC.nwk")
+
+# no partitioning
+inferred_cons_tree_lopho_noPart = Tree("AnalysisResults/constree_lopho_noPart.nwk")
+inferred_max_tree_lopho_noPart = Tree("AnalysisResults/maxtree_lopho_noPart.nwk")
+
+
+## MYRIAPODA
+real_tree_myria = Tree("AnalysisResults/RealTree_myria.nwk")
+
+# rclust
+inferred_cons_tree_myria_partAIC_rclust = Tree("AnalysisResults/constree_myria_rclusterAIC.nwk")
+inferred_max_tree_myria_partAIC_rclust = Tree("AnalysisResults/maxtree_myria_rclusterAIC.nwk")
+
+inferred_cons_tree_myria_partAICc_rclust = Tree("AnalysisResults/constree_myria_rclusterAICc.nwk")
+inferred_max_tree_myria_partAICc_rclust = Tree("AnalysisResults/maxtree_myria_rclusterAICc.nwk")
+
+inferred_cons_tree_myria_partBIC_rclust = Tree("AnalysisResults/constree_myria_rclusterBIC.nwk")
+inferred_max_tree_myria_partBIC_rclust = Tree("AnalysisResults/maxtree_myria_rclusterBIC.nwk")
+
+#greedy
+inferred_cons_tree_myria_partAIC_greedy = Tree("AnalysisResults/constree_myria_greedyAIC.nwk")
+inferred_max_tree_myria_partAIC_greedy = Tree("AnalysisResults/maxtree_myria_greedyAIC.nwk")
+
+inferred_cons_tree_myria_partAICc_greedy = Tree("AnalysisResults/constree_myria_greedyAICc.nwk")
+inferred_max_tree_myria_partAICc_greedy = Tree("AnalysisResults/maxtree_myria_greedyAICc.nwk")
+
+inferred_cons_tree_myria_partBIC_greedy = Tree("AnalysisResults/constree_myria_greedyBIC.nwk")
+inferred_max_tree_myria_partBIC_greedy = Tree("AnalysisResults/maxtree_myria_greedyBIC.nwk")
+
+# no partitioning
+inferred_cons_tree_myria_noPart = Tree("AnalysisResults/constree_myria_noPart.nwk")
+inferred_max_tree_myria_noPart = Tree("AnalysisResults/maxtree_myria_noPart.nwk")
+
 
 
 
 
 # get RF distance
-rf_distance(real_tree, inferred_tree_partAIC_rclust)
+rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partAIC_rclust)
+rf_distance(real_tree_lopho, inferred_max_tree_lopho_partAIC_rclust)
+rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partAICc_rclust)
+rf_distance(real_tree_lopho, inferred_max_tree_lopho_partAICc_rclust)
+rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partBIC_rclust)
+rf_distance(real_tree_lopho, inferred_max_tree_lopho_partBIC_rclust)
+rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partAIC_greedy)
+rf_distance(real_tree_lopho, inferred_max_tree_lopho_partAIC_greedy)
+rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partAICc_greedy)
+rf_distance(real_tree_lopho, inferred_max_tree_lopho_partAICc_greedy)
+rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partBIC_greedy)
+rf_distance(real_tree_lopho, inferred_max_tree_lopho_partBIC_greedy)
+
+rf_distance(real_tree_myria, inferred_cons_tree_myria_partAIC_rclust)
+rf_distance(real_tree_myria, inferred_max_tree_myria_partAIC_rclust)
+rf_distance(real_tree_myria, inferred_cons_tree_myria_partAICc_rclust)
+rf_distance(real_tree_myria, inferred_max_tree_myria_partAICc_rclust)
+rf_distance(real_tree_myria, inferred_cons_tree_myria_partBIC_rclust)
+rf_distance(real_tree_myria, inferred_max_tree_myria_partBIC_rclust)
+rf_distance(real_tree_myria, inferred_cons_tree_myria_partAIC_greedy)
+rf_distance(real_tree_myria, inferred_max_tree_myria_partAIC_greedy)
+rf_distance(real_tree_myria, inferred_cons_tree_myria_partAICc_greedy)
+rf_distance(real_tree_myria, inferred_max_tree_myria_partAICc_greedy)
+rf_distance(real_tree_myria, inferred_cons_tree_myria_partBIC_greedy)
+rf_distance(real_tree_myria, inferred_max_tree_myria_partBIC_greedy)
+
+
 
 # get Euclidean distance
 

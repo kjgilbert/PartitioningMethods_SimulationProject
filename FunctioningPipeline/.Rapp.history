@@ -1,31 +1,3 @@
-max.lik.trees <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)
-max.lik.trees
-max.lik.lines <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1]
-max.lik.lines
-max.lik.lines <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1]+1
-max.lik.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1
-max.lik.lines
-cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENCUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1
-unlist(strsplit(system(paste(c("grep -n CONSENCUS ", dat), collapse=""), intern=TRUE), split=":"))
-unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":"))
-cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=4, byrow=TRUE)[,1])+1
-cons.lines
-max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)
-max.lik.stats
-unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" "))
-max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)
-max.lik.stats
-setwd("~/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline")#
-dat <- "partitioning_treebuilding_output.txt"#
-#
-search.algo <- matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3]#
-scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4]#
-partitions <- matrix( unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="= ")), ncol=2, byrow=TRUE)[,2]#
-#
-max.lik.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=":")), ncol=10, byrow=TRUE)[,1])+1#
-max.lik.stats <- matrix(unlist(strsplit(system(paste(c("grep -n MAXIMUM ", dat), collapse=""), intern=TRUE), split=" ")), ncol=62, byrow=TRUE)[,c(9,16,25,29,31,36,38,42,44,52,58)]#
-cons.lines <- as.numeric(matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=":")), ncol=4, byrow=TRUE)[,1])+1
-out.dat <- data.frame(cbind(search.algo, scheme.criteria, partitions))
 out.dat
 max.lik.lines
 max.lik.stats
@@ -88,7 +60,6 @@ cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), 
 unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" "))
 cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)
 cons.stats
-cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)]
 cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)]
 cons.stats
 cons.stats <- matrix(unlist(strsplit(system(paste(c("grep -n CONSENSUS ", dat), collapse=""), intern=TRUE), split=" ")), ncol=24, byrow=TRUE)[,c(15,24)]
@@ -322,7 +293,6 @@ part.IC
 part.IC.score <- c(part.IC.score, NA)
 part.IC.score
 partitions <- c(partitions, NA)
-partitions <- c(partitions, NA)
 partitions
 class(partitions)
 max.lik.trees
@@ -496,3 +466,26 @@ names(out.dat) <- c("search.algo", "part.log.lik", "part.IC", "part.IC.score", "
 out.dat
 write(out.dat, file="AnalysisResults_AllStats.csv")
 write.csv(out.dat, file="AnalysisResults/AllStatsOutput.csv")
+setwd("~/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline")#
+dat <- "partitioning_treebuilding_output.txt"
+search.algo <- trimws(matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3])#
+scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4]
+search.algo
+scheme.criteria
+species <- unlist(strsplit(system(paste(c("grep -n sampledMSAs ", dat), collapse=""), intern=TRUE), split=":"))
+species
+unlist(strsplit(system(paste(c("grep -n sampledMSAs ", dat), collapse=""), intern=TRUE), split="_"))
+species <- matrix(unlist(strsplit(system(paste(c("grep -n sampledMSAs ", dat), collapse=""), intern=TRUE), split="_")), ncol=3, byrow=TRUE)[,2]
+species
+species
+class(search.algo)
+class(species)
+species <- c("lopho", "myria", "lopho", "myria")
+species
+class(species)
+?rep
+rep.int(species, times=7)
+rep_len(species, length.out=7)
+rep(species, times=2)
+rep(species, each=2)
+rep(species, each=7)

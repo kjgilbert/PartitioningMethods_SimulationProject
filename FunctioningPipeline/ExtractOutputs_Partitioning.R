@@ -1,9 +1,16 @@
 
-setwd("~/Documents/UNIL/PartitioningMethods_SimulationProject/FunctioningPipeline")
+args<-commandArgs(trailingOnly=TRUE)
+
+# args[1]: -- input directory
+setwd(args[1])
 
 
 
 dat <- "partitioning_treebuilding_output.txt"
+
+species <- matrix(unlist(strsplit(system(paste(c("grep -n sampledMSAs ", dat), collapse=""), intern=TRUE), split="_")), ncol=3, byrow=TRUE)[,2]
+# each output file should have 7 tree inferences, so repeat each species 7 times
+species.col <- rep(species, each=7)
 
 search.algo <- trimws(matrix(unlist(strsplit(system(paste(c("grep -n search ", dat), collapse=""), intern=TRUE), split=":")), ncol=3, byrow=TRUE)[,3])
 scheme.criteria <- matrix(unlist(strsplit(system(paste(c("grep -n Scheme ", dat), collapse=""), intern=TRUE), split="Scheme")), ncol=6, byrow=TRUE)[,3:4]
@@ -27,7 +34,7 @@ part.IC.score <- c(part.IC.score, NA)
 partitions <- c(partitions, NA)
 
 
-
+# should be seven lines for each species, so can iterate through
 max.lik.trees <- rep(NA, length(max.lik.lines))
 it <- 1
 for(i in max.lik.lines){
@@ -36,7 +43,7 @@ for(i in max.lik.lines){
 	close(con)
 	tree.line <- line[i]
 	max.lik.trees[it] <- tree.line
-	write(tree.line, file=paste(c("AnalysisResults/maxtree_", search.algo[it], part.IC[it], ".nwk"), collapse=""))
+	write(tree.line, file=paste(c("AnalysisResults/maxtree_", species[it], "_", search.algo[it], part.IC[it], ".nwk"), collapse=""))
 	it <- it + 1
 }
 
@@ -49,14 +56,14 @@ for(i in cons.lines){
 	close(con)
 	tree.line <- line[i]
 	cons.trees[it] <- tree.line
-	write(tree.line, file=paste(c("AnalysisResults/constree_", search.algo[it], part.IC[it], ".nwk"), collapse=""))
+	write(tree.line, file=paste(c("AnalysisResults/constree_", species[it], "_", search.algo[it], part.IC[it], ".nwk"), collapse=""))
 	it <- it + 1
 }
 
 
 
-out.dat <- data.frame(cbind(search.algo, part.log.lik, part.IC, part.IC.score, partitions, max.lik.stats, cons.stats, max.lik.trees, cons.trees))
-names(out.dat) <- c("search.algo", "part.log.lik", "part.IC", "part.IC.score", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens", "cons.log.lik", "cons.max.RF.dist", "max.lik.tree", "consen.tree")
+out.dat <- data.frame(cbind(species.col, search.algo, part.log.lik, part.IC, part.IC.score, partitions, max.lik.stats, cons.stats, max.lik.trees, cons.trees))
+names(out.dat) <- c("species","search.algo", "part.log.lik", "part.IC", "part.IC.score", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens", "cons.log.lik", "cons.max.RF.dist", "max.lik.tree", "consen.tree")
 
 
 write.csv(out.dat, file="AnalysisResults/AllStatsOutput.csv")

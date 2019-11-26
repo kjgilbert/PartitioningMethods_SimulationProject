@@ -6,20 +6,24 @@ raw_real_lopho="results_lopho/sim_match_lophotroch/RealTree.nwk"
 # 25 myria species
 raw_real_myria="results_myria/sim_match_myriapod/RealTree.nwk"
 
+outdir='AnalysisResults/'
+
 # lophotrochozoa
 for i in `seq 1 62`;
 	do
 	if (( $i < 10 ))
 	then
 	    num='0'$i
-	    new_ID='S0000'$i'_00001'
+	    new_ID='S00'$i'_00001'
 	else
 		num=$i
-	    new_ID='S000'$i'_00001'
+	    new_ID='S0'$i'_00001'
 	fi
 	curr_ID='SE0'$num
-	sed -i 's/$curr_ID/$new_ID/g' $raw_real_lopho
+	sed -i -- "s/$curr_ID/$new_ID/g" $raw_real_lopho
 done
+cp $raw_real_lopho $outdir'RealTree_lopho.nwk'
+
 
 # myriapoda
 
@@ -34,5 +38,6 @@ for i in `seq 1 25`;
 	    new_ID='S000'$i'_00001'
 	fi
 	curr_ID='SE0'$num
-	sed -i 's/$curr_ID/$new_ID/g' $raw_real_myria
+	sed -i --'s/$curr_ID/$new_ID/g' $raw_real_myria
 done
+cp $raw_real_myria $outdir'RealTree_myria.nwk'

@@ -24,7 +24,7 @@ ${current_path}SetupAndSimulate.sh $current_path $run_path
 input_folder=$current_path'sampledMSAs/'
 files=${input_folder}*.phy
 
-for i in $files;
+for f in $files;
     do
     # sample size of genes
     sample_size=$(echo $f | tr "_" "\n" | tail -n 1 | tr "." "\n" | head -n 1)

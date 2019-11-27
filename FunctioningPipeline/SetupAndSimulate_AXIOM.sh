@@ -3,6 +3,7 @@
 
 curr_path=$1
 run_path=$2
+ax_run_path=$3
 
 
 mkdir ${curr_path}'sampledMSAs'
@@ -73,6 +74,6 @@ done
 
 
 # make config files for partitionfinder
-${curr_path}MakeConfigs.sh $curr_path $run_path
+${curr_path}MakeConfigs.sh $curr_path $run_path $ax_run_path
 echo "config and slurm files done"
 

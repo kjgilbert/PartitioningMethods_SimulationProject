@@ -2,6 +2,9 @@
 
 current_path=$1
 run_path=$2
+ax_run_path=$3
+# actually it's only used for iqtree and partitionfinder, so keep name same and modify to correct path:
+run_path=$ax_run_path
 
 # put the cfg file in each corresponding directory
 
@@ -75,12 +78,12 @@ slurm_string_2=$'"
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=4G
 #SBATCH --time=2-00:00
-#SBATCH --partition=long
+#SBATCH --partition=ax-long
 #SBATCH --account=cdessim2_default
 
 
-source /scratch/wally/FAC/FBM/DBC/cdessim2/default/kgilbert/miniconda3/etc/profile.d/conda.sh
-conda activate my_python2
+source /scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/miniconda3/etc/profile.d/conda.sh
+conda activate /scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/miniconda3/envs
 '
 
 #________go through each gene sample size set________#

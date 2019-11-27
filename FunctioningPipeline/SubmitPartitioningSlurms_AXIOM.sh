@@ -2,18 +2,18 @@
 
 
 # make all the directories
-current_path='/scratch/wally/FAC/FBM/DBC/cdessim2/default/kgilbert/Genes_Length100/'
+current_path='/scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/Genes_Length100/'
 ##__________________________________##
 ##__________________ /\  ___________##
-##_________MODIFY ME ||  ___________##
+##______MODIFY ME___ ||  ___________##
 ##__________________ ||  ___________##
 ##__________________________________##
 
 
 run_path='/scratch/wally/FAC/FBM/DBC/cdessim2/default/kgilbert/'
+ax_run_path='/scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/'
 
-
-${current_path}SetupAndSimulate.sh $current_path $run_path
+${current_path}SetupAndSimulate.sh $current_path $run_path $ax_run_path
 
 # simulations are done, input files are reformatted and put into folders, 
 #     now run each set with partitionfinder and IQtree

@@ -1,63 +1,83 @@
 #!/bin/bash
 
-outfile='partitioning_treebuilding_output.txt'
+
+current_path='/scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/Rep1_genes100/'
+##__________________________________##
+##__________________ /\  ___________##
+##______MODIFY ME___ ||  ___________##
+##__________________ ||  ___________##
+##__________________________________##
 
 
-while read line
+outdir='AnalysisResults/'
+mkdir $outdir
+
+
+# get all inferred tree outputs into a good format for comparison and summarizing
+
+
+module load Bioinformatics/Software/vital-it
+module load R/latest
+
+Rscript ExtractOutputs_InDirectories_Partitioning.R $current_path
+
+
+
+
+
+
+##__________________________________##
+# get the real trees into a format for comparison to the inferred trees
+
+
+# 62 lopho species
+raw_real_lopho="results_lopho/sim_match_lophotroch/RealTree.nwk"
+# 25 myria species
+raw_real_myria="results_myria/sim_match_myriapod/RealTree.nwk"
+
+
+# lophotrochozoa
+for i in `seq 1 62`;
 	do
-	
-	if grep -c search $outfile; then
-        search_algo=$(head -n $line | tail -n 1 | tr " : " "\n" | tail -n 1)
-    else
-        echo not found
-    fi
-done <$outfile
+	if (( $i < 10 ))
+	then
+	    num='0'$i
+	    new_ID='S00'$i'_00001'
+	else
+		num=$i
+	    new_ID='S0'$i'_00001'
+	fi
+	curr_ID='SE0'$num
+	sed -i -- "s/$curr_ID/$new_ID/g" $raw_real_lopho
+done
+cp $raw_real_lopho $outdir'RealTree_lopho.nwk'
 
 
+# myriapoda
 
-
-while read line
+for i in `seq 1 25`;
 	do
-	if grep -c 'search' $line; then
-        search_algo=$(head -n $line | tail -n 1 | tr " : " "\n" | tail -n 1)
-    else
-        echo 'not found'
-    fi
-done <partitioning_treebuilding_output.txt
+	if (( $i < 10 ))
+	then
+	    num='0'$i
+	    new_ID='S0000'$i'_00001'
+	else
+		num=$i
+	    new_ID='S000'$i'_00001'
+	fi
+	curr_ID='SE0'$num
+	sed -i --'s/$curr_ID/$new_ID/g' $raw_real_myria
+done
+cp $raw_real_myria $outdir'RealTree_myria.nwk'
 
 
 
 
-    STR=''
-    rm -f 'sampledMSAs/config_lopho_'$samp'genes.txt'
-    touch 'sampledMSAs/config_lopho_'$samp'genes.txt'
-    for i in `seq 1 $samp`;
-        do
-        file=${lopho_dir}'MSA_'$i'_aa.fa '
-        STR=$STR$file
-        head -n 2 $file | tail -n 1 | wc -m >> 'sampledMSAs/config_lopho_'$samp'genes.txt'
-    done
-    paste $STR | awk -v f=1 -v t=$samp '{ if (NR%2==0) { for(i=f; i<=t;i++) {printf("%s%s",$i,(i==t)?"\n":OFS="")}} else {print $1}}' > 'sampledMSAs/MSA_lopho_'$samp'genes.fa'
-
-
-
-grep -c Scheme
+##__________________________________##
+# use python to get RF distance and Euclidean distance between trees
 
 
 
 
-while read line
-	do
-	
-	if grep -q search $outfile; then
-        search_algo=$(echo $f | tr "_" "\n" | tail -n 2 | head -n 1)
-    else
-        echo not found
-    fi
-	
-	it=$(expr $it + 1)
-	gene_start=$(expr $gene_end + 1)
-	gene_end=$(expr $line - 1 + $prev_gene_end)
-	prev_gene_end=$(expr $line - 1 + $prev_gene_end)
-	gene_string=$gene_string'gene'$it' = '$gene_start'-'$gene_end$';\n'
-done <$outfile
+
+

@@ -84,91 +84,11 @@ def rf_distance(tree1,tree2,option=False):
 
 # analyses on the outputs, using the above functions:
 
-## LOPHOTROCHOZOA
-real_tree_lopho = Tree("AnalysisResults/RealTree_lopho.nwk")
-
-# rclust
-inferred_cons_tree_lopho_partAIC_rclust = Tree("AnalysisResults/constree_lopho_rclusterAIC.nwk")
-inferred_max_tree_lopho_partAIC_rclust = Tree("AnalysisResults/maxtree_lopho_rclusterAIC.nwk")
-
-inferred_cons_tree_lopho_partAICc_rclust = Tree("AnalysisResults/constree_lopho_rclusterAICc.nwk")
-inferred_max_tree_lopho_partAICc_rclust = Tree("AnalysisResults/maxtree_lopho_rclusterAICc.nwk")
-
-inferred_cons_tree_lopho_partBIC_rclust = Tree("AnalysisResults/constree_lopho_rclusterBIC.nwk")
-inferred_max_tree_lopho_partBIC_rclust = Tree("AnalysisResults/maxtree_lopho_rclusterBIC.nwk")
-
-#greedy
-inferred_cons_tree_lopho_partAIC_greedy = Tree("AnalysisResults/constree_lopho_greedyAIC.nwk")
-inferred_max_tree_lopho_partAIC_greedy = Tree("AnalysisResults/maxtree_lopho_greedyAIC.nwk")
-
-inferred_cons_tree_lopho_partAICc_greedy = Tree("AnalysisResults/constree_lopho_greedyAICc.nwk")
-inferred_max_tree_lopho_partAICc_greedy = Tree("AnalysisResults/maxtree_lopho_greedyAICc.nwk")
-
-inferred_cons_tree_lopho_partBIC_greedy = Tree("AnalysisResults/constree_lopho_greedyBIC.nwk")
-inferred_max_tree_lopho_partBIC_greedy = Tree("AnalysisResults/maxtree_lopho_greedyBIC.nwk")
-
-# no partitioning
-inferred_cons_tree_lopho_noPart = Tree("AnalysisResults/constree_lopho_noPart.nwk")
-inferred_max_tree_lopho_noPart = Tree("AnalysisResults/maxtree_lopho_noPart.nwk")
-
-
-## MYRIAPODA
-real_tree_myria = Tree("AnalysisResults/RealTree_myria.nwk")
-
-# rclust
-inferred_cons_tree_myria_partAIC_rclust = Tree("AnalysisResults/constree_myria_rclusterAIC.nwk")
-inferred_max_tree_myria_partAIC_rclust = Tree("AnalysisResults/maxtree_myria_rclusterAIC.nwk")
-
-inferred_cons_tree_myria_partAICc_rclust = Tree("AnalysisResults/constree_myria_rclusterAICc.nwk")
-inferred_max_tree_myria_partAICc_rclust = Tree("AnalysisResults/maxtree_myria_rclusterAICc.nwk")
-
-inferred_cons_tree_myria_partBIC_rclust = Tree("AnalysisResults/constree_myria_rclusterBIC.nwk")
-inferred_max_tree_myria_partBIC_rclust = Tree("AnalysisResults/maxtree_myria_rclusterBIC.nwk")
-
-#greedy
-inferred_cons_tree_myria_partAIC_greedy = Tree("AnalysisResults/constree_myria_greedyAIC.nwk")
-inferred_max_tree_myria_partAIC_greedy = Tree("AnalysisResults/maxtree_myria_greedyAIC.nwk")
-
-inferred_cons_tree_myria_partAICc_greedy = Tree("AnalysisResults/constree_myria_greedyAICc.nwk")
-inferred_max_tree_myria_partAICc_greedy = Tree("AnalysisResults/maxtree_myria_greedyAICc.nwk")
-
-inferred_cons_tree_myria_partBIC_greedy = Tree("AnalysisResults/constree_myria_greedyBIC.nwk")
-inferred_max_tree_myria_partBIC_greedy = Tree("AnalysisResults/maxtree_myria_greedyBIC.nwk")
-
-# no partitioning
-inferred_cons_tree_myria_noPart = Tree("AnalysisResults/constree_myria_noPart.nwk")
-inferred_max_tree_myria_noPart = Tree("AnalysisResults/maxtree_myria_noPart.nwk")
-
-
-
-
+realTree = Tree(inputTree1)
+inferredTree = Tree(inputTree2)
 
 # get RF distance
-rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partAIC_rclust)
-rf_distance(real_tree_lopho, inferred_max_tree_lopho_partAIC_rclust)
-rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partAICc_rclust)
-rf_distance(real_tree_lopho, inferred_max_tree_lopho_partAICc_rclust)
-rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partBIC_rclust)
-rf_distance(real_tree_lopho, inferred_max_tree_lopho_partBIC_rclust)
-rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partAIC_greedy)
-rf_distance(real_tree_lopho, inferred_max_tree_lopho_partAIC_greedy)
-rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partAICc_greedy)
-rf_distance(real_tree_lopho, inferred_max_tree_lopho_partAICc_greedy)
-rf_distance(real_tree_lopho, inferred_cons_tree_lopho_partBIC_greedy)
-rf_distance(real_tree_lopho, inferred_max_tree_lopho_partBIC_greedy)
-
-rf_distance(real_tree_myria, inferred_cons_tree_myria_partAIC_rclust)
-rf_distance(real_tree_myria, inferred_max_tree_myria_partAIC_rclust)
-rf_distance(real_tree_myria, inferred_cons_tree_myria_partAICc_rclust)
-rf_distance(real_tree_myria, inferred_max_tree_myria_partAICc_rclust)
-rf_distance(real_tree_myria, inferred_cons_tree_myria_partBIC_rclust)
-rf_distance(real_tree_myria, inferred_max_tree_myria_partBIC_rclust)
-rf_distance(real_tree_myria, inferred_cons_tree_myria_partAIC_greedy)
-rf_distance(real_tree_myria, inferred_max_tree_myria_partAIC_greedy)
-rf_distance(real_tree_myria, inferred_cons_tree_myria_partAICc_greedy)
-rf_distance(real_tree_myria, inferred_max_tree_myria_partAICc_greedy)
-rf_distance(real_tree_myria, inferred_cons_tree_myria_partBIC_greedy)
-rf_distance(real_tree_myria, inferred_max_tree_myria_partBIC_greedy)
+print(rf_distance(realTree, inferredTree))
 
 
 
@@ -176,13 +96,14 @@ rf_distance(real_tree_myria, inferred_max_tree_myria_partBIC_greedy)
 
 tns = dendropy.TaxonNamespace()
 
-tree1 = tree.get_from_path(
-        "AnalysisResults/modified_RealTree.nwk",
-        "newick", taxon_namespace=tns)
+tree1 = tree.get_from_path(inputTree1, "newick", taxon_namespace=tns)
+tree2 = tree.get_from_path(inputTree2, "newick", taxon_namespace=tns)
 
-tree2 = tree.get_from_path(
-        "AnalysisResults/tree_noPart.nwk",
-        "newick", taxon_namespace=tns)
 tree1.encode_bipartitions()
 tree2.encode_bipartitions()
+
 print(treecompare.euclidean_distance(tree1, tree2))
+
+
+
+

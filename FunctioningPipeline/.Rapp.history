@@ -477,7 +477,6 @@ species
 unlist(strsplit(system(paste(c("grep -n sampledMSAs ", dat), collapse=""), intern=TRUE), split="_"))
 species <- matrix(unlist(strsplit(system(paste(c("grep -n sampledMSAs ", dat), collapse=""), intern=TRUE), split="_")), ncol=3, byrow=TRUE)[,2]
 species
-species
 class(search.algo)
 class(species)
 species <- c("lopho", "myria", "lopho", "myria")

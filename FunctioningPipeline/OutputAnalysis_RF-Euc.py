@@ -1,6 +1,9 @@
+# input / output
+import sys
+
 # euclidean distance calculation
 import dendropy
-from dendropy import Tree
+from dendropy import Tree as tree
 from dendropy.calculate import treecompare
 
 
@@ -84,11 +87,14 @@ def rf_distance(tree1,tree2,option=False):
 
 # analyses on the outputs, using the above functions:
 
+inputTree1 = sys.argv[1]
+inputTree2 = sys.argv[2]
+
 realTree = Tree(inputTree1)
 inferredTree = Tree(inputTree2)
 
 # get RF distance
-print(rf_distance(realTree, inferredTree))
+rf_dist = (rf_distance(realTree, inferredTree))
 
 
 
@@ -102,8 +108,10 @@ tree2 = tree.get_from_path(inputTree2, "newick", taxon_namespace=tns)
 tree1.encode_bipartitions()
 tree2.encode_bipartitions()
 
-print(treecompare.euclidean_distance(tree1, tree2))
+eucl_dist = (treecompare.euclidean_distance(tree1, tree2))
 
+
+print(inputTree2, rf_dist, eucl_dist)
 
 
 

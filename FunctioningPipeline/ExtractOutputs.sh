@@ -8,7 +8,7 @@ current_path='/scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/Rep1_genes100
 ##__________________ ||  ___________##
 ##__________________________________##
 
-
+run_path='/scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/'
 outdir='AnalysisResults/'
 mkdir $outdir
 
@@ -76,8 +76,26 @@ cp $raw_real_myria $outdir'RealTree_myria.nwk'
 ##__________________________________##
 # use python to get RF distance and Euclidean distance between trees
 
+lophoFiles=${outdir}maxtree_lopho_*.nwk
+myriaFiles=${outdir}maxtree_myria_*.nwk
 
+## CHECK THAT THEY ARE READ RIGHT INTO THE PYTHON SCRIPT - quotes and final directory not being doubled
 
+echo "filename rf_dist eucl_dist" > RF_Eucl_results.txt
 
+source /scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/miniconda3/etc/profile.d/conda.sh
+conda activate my_python3
 
+# lopho
+for f in $lophoFiles;
+    do
+    python ${run_path}OutputAnalysis_RF-Euc.py "${outdir}RealTree_lopho.nwk" "${outdir}${f}" >> RF_Eucl_results.txt
+done
 
+# myria
+for f in $myriaFiles;
+    do
+    python ${run_path}OutputAnalysis_RF-Euc.py "${outdir}RealTree_myria.nwk" "${outdir}${f}" >> RF_Eucl_results.txt
+done
+
+conda deactivate

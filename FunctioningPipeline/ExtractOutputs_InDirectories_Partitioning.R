@@ -4,7 +4,7 @@ args<-commandArgs(trailingOnly=TRUE)
 # args[1]: -- input directory
 setwd(args[1])
 
-system("mkdir AnalysisResults")
+## this is in the bash file instead   ## system("mkdir AnalysisResults")
 
 ##setwd("~/Documents/UNIL/TEST_analyses")
 outfiles <- system(paste("ls part_N*/partitioning_treebuilding_output.txt"), intern=TRUE)

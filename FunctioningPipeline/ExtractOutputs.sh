@@ -60,13 +60,13 @@ for i in `seq 1 25`;
 	if (( $i < 10 ))
 	then
 	    num='0'$i
-	    new_ID='S0000'$i'_00001'
+	    new_ID='S00'$i'_00001'
 	else
 		num=$i
-	    new_ID='S000'$i'_00001'
+	    new_ID='S0'$i'_00001'
 	fi
 	curr_ID='SE0'$num
-	sed -i --'s/$curr_ID/$new_ID/g' $raw_real_myria
+	sed -i -- "s/$curr_ID/$new_ID/g" $raw_real_myria
 done
 cp $raw_real_myria $outdir'RealTree_myria.nwk'
 
@@ -83,7 +83,7 @@ myriaFiles=${outdir}maxtree_myria_*.nwk
 
 echo "filename rf_dist eucl_dist" > RF_Eucl_results.txt
 
-source /scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/miniconda3/etc/profile.d/conda.sh
+source /scratch/wally/FAC/FBM/DBC/cdessim2/default/kgilbert/miniconda3/etc/profile.d/conda.sh
 conda activate my_python3
 
 # lopho

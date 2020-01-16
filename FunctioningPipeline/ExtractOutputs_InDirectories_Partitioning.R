@@ -4,14 +4,13 @@ args<-commandArgs(trailingOnly=TRUE)
 # args[1]: -- input directory
 setwd(args[1])
 
-## this is in the bash file instead   ## system("mkdir AnalysisResults")
-
-##setwd("~/Documents/UNIL/TEST_analyses")
+setwd("~/Documents/UNIL/TEST_analyses")
 outfiles <- system(paste("ls part_N*/partitioning_treebuilding_output.txt"), intern=TRUE)
 
 num.files <- length(outfiles)
-out.dat <- data.frame(matrix(NA, ncol=19, nrow=num.files))
-names(out.dat) <- c("species","search.algo", "part.log.lik", "part.IC", "part.IC.score", "num.partition.steps", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens", "cons.log.lik", "cons.max.RF.dist", "max.lik.tree", "consen.tree")
+out.dat <- data.frame(matrix(NA, ncol=16, nrow=num.files))
+##names(out.dat) <- c("species","search.algo", "part.log.lik", "part.IC", "part.IC.score", "num.partition.steps", "partitions", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens", "cons.log.lik", "cons.max.RF.dist", "max.lik.tree", "consen.tree")
+names(out.dat) <- c("species","search.algo", "part.log.lik", "part.IC", "part.IC.score", "num.partition.steps", "max.log.lik", "uncon.log.lik", "num.free.params", "AIC", "AICc", "BIC", "sum.branch.lens", "sum.int.branch.lens", "cons.log.lik", "cons.max.RF.dist")
 
 
 iterate <- 1
@@ -87,7 +86,7 @@ fi"), collapse=""), intern=TRUE)
 
     }
 	
-    out.dat[iterate ,] <- c(species, search.algo, part.log.lik, part.IC, part.IC.score, partitioning.steps, partitions, max.lik.stats, cons.stats, max.tree, cons.tree)	
+    out.dat[iterate ,] <- c(species, search.algo, part.log.lik, part.IC, part.IC.score, partitioning.steps, max.lik.stats, cons.stats)	
     iterate <- iterate + 1
 }
 

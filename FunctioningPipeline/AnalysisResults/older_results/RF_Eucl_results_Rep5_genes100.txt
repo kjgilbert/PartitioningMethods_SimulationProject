@@ -1,0 +1,2 @@
+filename rf_dist eucl_dist
+AnalysisResults/maxtree_lopho_20_noPart.nwk 0.06779661016949153 418.554272464701

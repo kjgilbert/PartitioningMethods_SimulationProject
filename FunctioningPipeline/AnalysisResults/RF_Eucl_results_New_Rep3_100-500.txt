@@ -1,0 +1,8 @@
+filename rf_dist eucl_dist
+AnalysisResults/maxtree_lopho_10_noPart.nwk 0.0847457627118644 967.2633519609024
+AnalysisResults/maxtree_lopho_20_noPart.nwk 0.05084745762711865 967.034608838455
+AnalysisResults/maxtree_lopho_40_noPart.nwk 0.06779661016949153 967.2084234129932
+AnalysisResults/maxtree_myria_10_noPart.nwk 0.09090909090909091 787.6077095864885
+AnalysisResults/maxtree_myria_20_noPart.nwk 0.09090909090909091 787.6905983220307
+AnalysisResults/maxtree_myria_40_noPart.nwk 0.0 787.6660707835795
+AnalysisResults/maxtree_myria_80_noPart.nwk 0.09090909090909091 787.7098246445437

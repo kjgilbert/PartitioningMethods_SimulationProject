@@ -181,6 +181,15 @@ dat$gene.size <- 100
 dat$mut.rate <- 500
 dat5 <- dat
 
+dat5b <- read.csv("AllStatsOutput_New_Rep6_100-500.csv", header=TRUE, stringsAsFactors=FALSE)
+dat5b$uniqueID <- paste(dat5b$species, dat5b$samp.size, dat5b$search.algo, dat5b$part.IC, sep="_")
+dat5bb <- read.table("RF_Eucl_results_New_Rep6_100-500.txt", header=TRUE, stringsAsFactors=FALSE)
+dat5bb$uniqueID <- make.merge.id(dat5bb)
+dat <- merge(dat5b, dat5bb, by="uniqueID")
+dat$gene.size <- 100
+dat$mut.rate <- 500
+dat5b <- dat
+
 
 # mut rate 1000
 dat6 <- read.csv("AllStatsOutput_New_Rep1_100-1000.csv", header=TRUE, stringsAsFactors=FALSE)
@@ -228,7 +237,32 @@ dat$gene.size <- 100
 dat$mut.rate <- 1000
 dat10 <- dat
 
+dat11 <- read.csv("AllStatsOutput_New_Rep6_100-1000.csv", header=TRUE, stringsAsFactors=FALSE)
+dat11$uniqueID <- paste(dat11$species, dat11$samp.size, dat11$search.algo, dat11$part.IC, sep="_")
+dat11b <- read.table("RF_Eucl_results_New_Rep6_100-1000.txt", header=TRUE, stringsAsFactors=FALSE)
+dat11b$uniqueID <- make.merge.id(dat11b)
+dat <- merge(dat11, dat11b, by="uniqueID")
+dat$gene.size <- 100
+dat$mut.rate <- 1000
+dat11 <- dat
 
+dat12 <- read.csv("AllStatsOutput_Newest_Rep7_100-1000.csv", header=TRUE, stringsAsFactors=FALSE)
+dat12$uniqueID <- paste(dat12$species, dat12$samp.size, dat12$search.algo, dat12$part.IC, sep="_")
+dat12b <- read.table("RF_Eucl_results_New_Rep7_100-1000.txt", header=TRUE, stringsAsFactors=FALSE)
+dat12b$uniqueID <- make.merge.id(dat12b)
+dat <- merge(dat12, dat12b, by="uniqueID")
+dat$gene.size <- 100
+dat$mut.rate <- 1000
+dat12 <- dat
+
+dat13 <- read.csv("AllStatsOutput_Newest_Rep8_100-1000.csv", header=TRUE, stringsAsFactors=FALSE)
+dat13$uniqueID <- paste(dat13$species, dat13$samp.size, dat13$search.algo, dat13$part.IC, sep="_")
+dat13b <- read.table("RF_Eucl_results_New_Rep8_100-1000.txt", header=TRUE, stringsAsFactors=FALSE)
+dat13b$uniqueID <- make.merge.id(dat13b)
+dat <- merge(dat13, dat13b, by="uniqueID")
+dat$gene.size <- 100
+dat$mut.rate <- 1000
+dat13 <- dat
 ########
 
 
@@ -238,14 +272,17 @@ dat10 <- dat
 ########
 
 
+
+plot.stat <- "max.log.lik"
+
+
+
 pdf("Results_Plots/CompareLogLikelihoods.pdf", width=8, height=4)
 par(mfrow=c(1,3))
-
 opac <- 0.75
 pt.lwd <- 2
 xlimits <- c(-0.9,0.9)
 ylimits <- c(-52.5,3)
-plot.stat <- "max.log.lik"
 plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part max log likelihood", main="partitioning w/ AIC")
 abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
 #analyze.euc.datset(dat1, "AIC")
@@ -253,16 +290,20 @@ text(-0.7,3.5, "no partitioning", cex=0.6)
 text(-0.7,2, "higher max LL", cex=0.6)
 text(-0.7,-2, "partitioning", cex=0.6)
 text(-0.7,-3.5, "higher max LL", cex=0.6)
-euc.size.by.partitions(dat1, "AIC", stat=plot.stat)
-euc.size.by.partitions(dat2, "AIC", stat=plot.stat)
-euc.size.by.partitions(dat3, "AIC", stat=plot.stat)
-euc.size.by.partitions(dat4, "AIC", stat=plot.stat)
-euc.size.by.partitions(dat5, "AIC", stat=plot.stat)
+# euc.size.by.partitions(dat1, "AIC", stat=plot.stat)
+# euc.size.by.partitions(dat2, "AIC", stat=plot.stat)
+# euc.size.by.partitions(dat3, "AIC", stat=plot.stat)
+# euc.size.by.partitions(dat4, "AIC", stat=plot.stat)
+# euc.size.by.partitions(dat5, "AIC", stat=plot.stat)
+# euc.size.by.partitions(dat5b, "AIC", stat=plot.stat)
 euc.size.by.partitions(dat6, "AIC", stat=plot.stat)
 euc.size.by.partitions(dat7, "AIC", stat=plot.stat)
 euc.size.by.partitions(dat8, "AIC", stat=plot.stat)
 euc.size.by.partitions(dat9, "AIC", stat=plot.stat)
 euc.size.by.partitions(dat10, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat11, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat12, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat13, "AIC", stat=plot.stat)
 legend("bottomleft", c("lopho", "myria"), species, pch=spp.pch, col="black", bg="white", bty="n")
 
 plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part max log likelihood", main="partitioning w/ BIC")
@@ -271,29 +312,269 @@ text(-0.5,-49, "no partitioning", cex=0.7)
 text(-0.5,-51, "closer to true tree", cex=0.7)
 text(0.5,-49, "partitioning", cex=0.7)
 text(0.5,-51, "closer to true tree", cex=0.7)
-euc.size.by.partitions(dat1, "BIC", stat=plot.stat)
-euc.size.by.partitions(dat2, "BIC", stat=plot.stat)
-euc.size.by.partitions(dat3, "BIC", stat=plot.stat)
-euc.size.by.partitions(dat4, "BIC", stat=plot.stat)
-euc.size.by.partitions(dat5, "BIC", stat=plot.stat)
+# euc.size.by.partitions(dat1, "BIC", stat=plot.stat)
+# euc.size.by.partitions(dat2, "BIC", stat=plot.stat)
+# euc.size.by.partitions(dat3, "BIC", stat=plot.stat)
+# euc.size.by.partitions(dat4, "BIC", stat=plot.stat)
+# euc.size.by.partitions(dat5, "BIC", stat=plot.stat)
+# euc.size.by.partitions(dat5b, "BIC", stat=plot.stat)
 euc.size.by.partitions(dat6, "BIC", stat=plot.stat)
 euc.size.by.partitions(dat7, "BIC", stat=plot.stat)
 euc.size.by.partitions(dat8, "BIC", stat=plot.stat)
 euc.size.by.partitions(dat9, "BIC", stat=plot.stat)
 euc.size.by.partitions(dat10, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat11, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat12, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat13, "BIC", stat=plot.stat)
 
 plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part max log likelihood", main="partitioning w/ AICc")
+abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
+# euc.size.by.partitions(dat1, "AICc", stat=plot.stat)
+# euc.size.by.partitions(dat2, "AICc", stat=plot.stat)
+# euc.size.by.partitions(dat3, "AICc", stat=plot.stat)
+# euc.size.by.partitions(dat4, "AICc", stat=plot.stat)
+# euc.size.by.partitions(dat5, "AICc", stat=plot.stat)
+# euc.size.by.partitions(dat5b, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat6, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat7, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat8, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat9, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat10, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat11, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat12, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat13, "AICc", stat=plot.stat)
+
+legend("bottomleft", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", bg="white", cex=0.9, pt.cex=1.5)
+dev.off()
+
+
+
+
+
+
+
+
+
+
+plot.stat <- "AIC"
+
+
+
+pdf("Results_Plots/CompareAICs.pdf", width=8, height=4)
+par(mfrow=c(1,3))
+opac <- 0.75
+pt.lwd <- 2
+xlimits <- c(-0.9,0.9)
+ylimits <- c(-3,95)
+plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part AIC", main="partitioning w/ AIC")
+abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
+#analyze.euc.datset(dat1, "AIC")
+text(-0.7,5, "partitioning", cex=0.6)
+text(-0.7,2, "lower AIC", cex=0.6)
+text(-0.7,-2, "no partitioning", cex=0.6)
+text(-0.7,-5, "lower AIC", cex=0.6)
+euc.size.by.partitions(dat1, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat2, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat3, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat4, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat5, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat5b, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat6, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat7, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat8, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat9, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat10, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat11, "AIC", stat=plot.stat)
+legend("topleft", c("lopho", "myria"), species, pch=spp.pch, col="black", bg="white", bty="n")
+
+plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part AIC", main="partitioning w/ BIC")
+abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
+text(-0.5,90, "no partitioning", cex=0.7)
+text(-0.5,86, "closer to true tree", cex=0.7)
+text(0.5,90, "partitioning", cex=0.7)
+text(0.5,86, "closer to true tree", cex=0.7)
+euc.size.by.partitions(dat1, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat2, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat3, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat4, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat5, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat5b, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat6, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat7, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat8, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat9, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat10, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat11, "BIC", stat=plot.stat)
+
+plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part AIC", main="partitioning w/ AICc")
 abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
 euc.size.by.partitions(dat1, "AICc", stat=plot.stat)
 euc.size.by.partitions(dat2, "AICc", stat=plot.stat)
 euc.size.by.partitions(dat3, "AICc", stat=plot.stat)
 euc.size.by.partitions(dat4, "AICc", stat=plot.stat)
 euc.size.by.partitions(dat5, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat5b, "AICc", stat=plot.stat)
 euc.size.by.partitions(dat6, "AICc", stat=plot.stat)
 euc.size.by.partitions(dat7, "AICc", stat=plot.stat)
 euc.size.by.partitions(dat8, "AICc", stat=plot.stat)
 euc.size.by.partitions(dat9, "AICc", stat=plot.stat)
 euc.size.by.partitions(dat10, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat11, "AICc", stat=plot.stat)
 
-legend("bottomleft", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", bg="white", cex=0.9, pt.cex=1.5)
+legend("topleft", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", bg="white", cex=0.9, pt.cex=1.5)
 dev.off()
+
+
+
+
+
+
+
+
+
+plot.stat <- "BIC"
+
+
+pdf("Results_Plots/CompareBICs.pdf", width=8, height=4)
+par(mfrow=c(1,3))
+opac <- 0.75
+pt.lwd <- 2
+xlimits <- c(-0.9,0.9)
+ylimits <- c(-115,53)
+plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part BIC", main="partitioning w/ AIC")
+abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
+#analyze.euc.datset(dat1, "AIC")
+text(-0.7,9, "partitioning", cex=0.6)
+text(-0.7,5, "lower BIC", cex=0.6)
+text(-0.7,-5, "no partitioning", cex=0.6)
+text(-0.7,-9, "lower BIC", cex=0.6)
+euc.size.by.partitions(dat1, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat2, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat3, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat4, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat5, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat5b, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat6, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat7, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat8, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat9, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat10, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat11, "AIC", stat=plot.stat)
+legend("topleft", c("lopho", "myria"), species, pch=spp.pch, col="black", bg="white", bty="n")
+
+plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part BIC", main="partitioning w/ BIC")
+abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
+text(-0.5,-50, "no partitioning", cex=0.75)
+text(-0.5,-56, "closer to true tree", cex=0.75)
+text(0.5,-50, "partitioning", cex=0.75)
+text(0.5,-56, "closer to true tree", cex=0.75)
+euc.size.by.partitions(dat1, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat2, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat3, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat4, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat5, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat5b, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat6, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat7, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat8, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat9, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat10, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat11, "BIC", stat=plot.stat)
+
+plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part BIC", main="partitioning w/ AICc")
+abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
+euc.size.by.partitions(dat1, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat2, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat3, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat4, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat5, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat5b, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat6, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat7, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat8, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat9, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat10, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat11, "AICc", stat=plot.stat)
+
+legend("topleft", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", bg="white", cex=0.9, pt.cex=1.5)
+dev.off()
+
+
+
+
+
+
+
+
+
+
+
+plot.stat <- "AICc"
+
+
+
+pdf("Results_Plots/CompareAICcs.pdf", width=8, height=4)
+par(mfrow=c(1,3))
+opac <- 0.75
+pt.lwd <- 2
+xlimits <- c(-0.9,0.9)
+ylimits <- c(-3,95)
+plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part AICc", main="partitioning w/ AIC")
+abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
+#analyze.euc.datset(dat1, "AIC")
+text(-0.7,5, "partitioning", cex=0.6)
+text(-0.7,2, "lower AIC", cex=0.6)
+text(-0.7,-2, "no partitioning", cex=0.6)
+text(-0.7,-5, "lower AIC", cex=0.6)
+euc.size.by.partitions(dat1, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat2, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat3, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat4, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat5, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat5b, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat6, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat7, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat8, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat9, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat10, "AIC", stat=plot.stat)
+euc.size.by.partitions(dat11, "AIC", stat=plot.stat)
+legend("topleft", c("lopho", "myria"), species, pch=spp.pch, col="black", bg="white", bty="n")
+
+plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part AICc", main="partitioning w/ BIC")
+abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
+text(-0.5,90, "no partitioning", cex=0.7)
+text(-0.5,86, "closer to true tree", cex=0.7)
+text(0.5,90, "partitioning", cex=0.7)
+text(0.5,86, "closer to true tree", cex=0.7)
+euc.size.by.partitions(dat1, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat2, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat3, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat4, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat5, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat5b, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat6, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat7, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat8, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat9, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat10, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat11, "BIC", stat=plot.stat)
+
+plot(0, type="n", xlim=xlimits, ylim=ylimits, xlab="no part - part eucl dist from true tree", ylab="no part - part AICc", main="partitioning w/ AICc")
+abline(h=0, col="gray75", lty=2); abline(v=0, col="gray75", lty=2)
+euc.size.by.partitions(dat1, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat2, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat3, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat4, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat5, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat5b, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat6, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat7, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat8, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat9, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat10, "AICc", stat=plot.stat)
+euc.size.by.partitions(dat11, "AICc", stat=plot.stat)
+
+legend("topleft", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", bg="white", cex=0.9, pt.cex=1.5)
+dev.off()
+
+

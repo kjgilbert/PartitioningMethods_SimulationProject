@@ -130,6 +130,38 @@ for(i in 1:length(infiles.a)){
 	dat <- rbind(dat, temp.dat)
 }
 
+no.part.dat <- dat[dat$part.IC == "noPart" ,]
+
+
+## IS there a statistically significant difference between the RF/eucl distance to true tree of no partitioning vs with partitioning??
+# compare at each sample size, for each species, for both RF and euclidean distance
+
+stats <- c("rf_dist", "eucl_dist")
+spp <- c("myria", "lopho")
+samps <- c(10,20,40,80)
+stat.data.set <- data.frame(matrix(NA, ncol=8, nrow=8))
+names(stat.data.set) <- c("species", "samp.size", "rf_twoside_p", "rf_less_p", "rf_greater_p", "eucl_twoside_p", "eucl_less_p", "eucl_greater_p")
+
+iterate <- 1
+for(j in spp){
+	for(k in samps){
+		temp.dat.no.part <- dat[dat$samp.size == k & dat$species == j & dat$part.IC == "noPart" , ]
+		temp.dat.part <- dat[dat$samp.size == k & dat$species == j & dat$part.IC == "BIC" , ]
+		
+		rf_ts_p <- wilcox.test(temp.dat.no.part$rf_dist, temp.dat.part$rf_dist, paired=TRUE, alternative="two.sided")$p.value # is there a significant diff?
+		rf_less_p <- wilcox.test(temp.dat.no.part$rf_dist, temp.dat.part$rf_dist, paired=TRUE, alternative="less")$p.value # is the rf distance smaller in no part vs partitioned?
+		rf_greater_p <- wilcox.test(temp.dat.no.part$rf_dist, temp.dat.part$rf_dist, paired=TRUE, alternative="greater")$p.value # is the rf distance smaller in partitioned trees?
+		eucl_ts_p <- wilcox.test(temp.dat.no.part$eucl_dist, temp.dat.part$eucl_dist, paired=TRUE, alternative="two.sided")$p.value
+		eucl_less_p <- wilcox.test(temp.dat.no.part$eucl_dist, temp.dat.part$eucl_dist, paired=TRUE, alternative="less")$p.value # is the euclidean distance smaller in no part vs partitioned?
+		eucl_greater_p <- wilcox.test(temp.dat.no.part$eucl_dist, temp.dat.part$eucl_dist, paired=TRUE, alternative="greater")$p.value # is the euclidean distance smaller in partitioned trees?
+		
+		stat.data.set[iterate, ] <- c(j, k, rf_ts_p, rf_less_p, rf_greater_p, eucl_ts_p, eucl_less_p, eucl_greater_p)
+		iterate <- iterate + 1
+	}
+}
+
+
+
 ####################################
 samp.size.col <- c("steelblue4", "darkorange2", "green4", "red3")
 outline.col <- "gray30"
@@ -145,7 +177,7 @@ ytext2 <- 1.1
 
 
 
-pdf("Results_Plots/Boxplots.pdf", width=6, height=8)
+pdf("Results_Plots/Boxplots_withStats.pdf", width=6, height=8)
 par(mfrow=c(2,2), mar=c(3.25,3.25,1.5,0.25))
 
 
@@ -162,6 +194,13 @@ for(i in 1:4){
 	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
 	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
+# add p values from 2-sided wilcoxon test
+text(x=c(0.65,1:4), y=rep(0.125, 5), cex=0.75, c(expression(italic("p")*" = "), 
+	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 10][1]), digits=2), 
+	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 20][1]), digits=2),
+	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 40][1]), digits=2),
+	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 80][1]), digits=2)))
+
 
 plot(0, type="n", xlim=c(0.5,4.5), ylim=ylim1, xlab="", xaxt="n", ylab="", main="Myriapoda", mgp=c(2.1,0.9,0))
 axis(side=1, at=c(1:4), c(1:4))
@@ -173,7 +212,13 @@ for(i in 1:4){
 	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
 	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
-
+text(x=c(0.65,1:4), y=rep(0.125, 5), cex=0.75, c(expression(italic("p")*" = "), 
+	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 10][1]), digits=2), 
+	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 20][1]), digits=2),
+	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 40][1]), digits=2),
+	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 80][1]), digits=2)))
+	
+	
 plot(0, type="n", xlim=c(0.5,4.5), ylim=ylim2, xlab="num. genes", xaxt="n", ylab="diff in eucl dist from true tree for 'no part' - 'part'", main="", mgp=c(2.1,0.9,0))
 axis(side=1, at=c(1:4), c(1:4))
 abline(h=0, col="gray75", lty=3)
@@ -184,6 +229,12 @@ for(i in 1:4){
 	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
 	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
+text(x=c(0.65,1:4), y=rep(1.25, 5), cex=0.75, c(expression(italic("p")*" = "), 
+	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 10][1]), digits=2), 
+	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 20][1]), digits=2),
+	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 40][1]), digits=2),
+	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 80][1]), digits=2)))
+
 
 plot(0, type="n", xlim=c(0.5,4.5), ylim=ylim2, xlab="num. genes", xaxt="n", ylab="", main="", mgp=c(2.1,0.9,0))
 axis(side=1, at=c(1:4), c(1:4))
@@ -195,6 +246,11 @@ for(i in 1:4){
 	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
 	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
+text(x=c(0.65,1:4), y=rep(1.25, 5), cex=0.75, c(expression(italic("p")*" = "), 
+	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 10][1]), digits=2), 
+	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 20][1]), digits=2),
+	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 40][1]), digits=2),
+	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 80][1]), digits=2)))
 
 
 dev.off()

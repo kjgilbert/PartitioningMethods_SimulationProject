@@ -248,6 +248,15 @@ dat$gene.size <- 100
 dat$mut.rate <- 1000
 dat16 <- dat
 
+dat17 <- read.csv("AllStatsOutput_Newest_Rep12_100-1000.csv", header=TRUE, stringsAsFactors=FALSE)
+dat17$uniqueID <- paste(dat17$species, dat17$samp.size, dat17$search.algo, dat17$part.IC, sep="_")
+dat17b <- read.table("RF_Eucl_results_New_Rep12_100-1000.txt", header=TRUE, stringsAsFactors=FALSE)
+dat17b$uniqueID <- make.merge.id(dat17b)
+dat <- merge(dat17, dat17b, by="uniqueID")
+dat$gene.size <- 100
+dat$mut.rate <- 1000
+dat17 <- dat
+
 ########
 ########
 
@@ -289,6 +298,7 @@ rf_dist.size.by.partitions(dat13, "BIC", stat=plot.stat)
 rf_dist.size.by.partitions(dat14, "BIC", stat=plot.stat)
 rf_dist.size.by.partitions(dat15, "BIC", stat=plot.stat)
 rf_dist.size.by.partitions(dat16, "BIC", stat=plot.stat)
+rf_dist.size.by.partitions(dat17, "BIC", stat=plot.stat)
 
 legend("bottomleft", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", bg="white", cex=0.9, pt.cex=1.5)
 legend("topleft", c("lopho", "myria"), species, pch=spp.pch, col="black", bg="white", bty="n")
@@ -317,6 +327,7 @@ euc.size.by.partitions(dat13, "BIC", stat=plot.stat)
 euc.size.by.partitions(dat14, "BIC", stat=plot.stat)
 euc.size.by.partitions(dat15, "BIC", stat=plot.stat)
 euc.size.by.partitions(dat16, "BIC", stat=plot.stat)
+euc.size.by.partitions(dat17, "BIC", stat=plot.stat)
 
 
 dev.off()

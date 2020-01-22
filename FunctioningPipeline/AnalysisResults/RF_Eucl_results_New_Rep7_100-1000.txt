@@ -12,6 +12,7 @@ AnalysisResults/maxtree_lopho_40_rclusterAICc.nwk 0.01694915254237288 1360.30856
 AnalysisResults/maxtree_lopho_40_rclusterAIC.nwk 0.01694915254237288 1360.3090225230253
 AnalysisResults/maxtree_lopho_40_rclusterBIC.nwk 0.01694915254237288 1360.3341261703918
 AnalysisResults/maxtree_lopho_80_noPart.nwk 0.0 1360.0210919760038
+AnalysisResults/maxtree_lopho_80_rclusterAIC.nwk 0.0 1360.0145341559148
 AnalysisResults/maxtree_myria_10_noPart.nwk 0.5909090909090909 1909.5244099257684
 AnalysisResults/maxtree_myria_10_rclusterAICc.nwk 0.5909090909090909 1910.7091467612815
 AnalysisResults/maxtree_myria_10_rclusterAIC.nwk 0.5909090909090909 1910.692541564225
@@ -25,4 +26,6 @@ AnalysisResults/maxtree_myria_40_rclusterAICc.nwk 0.3181818181818182 1906.764937
 AnalysisResults/maxtree_myria_40_rclusterAIC.nwk 0.3181818181818182 1906.7953775060234
 AnalysisResults/maxtree_myria_40_rclusterBIC.nwk 0.3181818181818182 1907.1144089991067
 AnalysisResults/maxtree_myria_80_noPart.nwk 0.09090909090909091 1906.0407024777585
+AnalysisResults/maxtree_myria_80_rclusterAICc.nwk 0.09090909090909091 1905.8331366278321
+AnalysisResults/maxtree_myria_80_rclusterAIC.nwk 0.09090909090909091 1905.8173264840725
 AnalysisResults/maxtree_myria_80_rclusterBIC.nwk 0.09090909090909091 1906.1341339663054

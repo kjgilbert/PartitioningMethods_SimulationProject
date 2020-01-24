@@ -84,15 +84,15 @@ infiles.a <- c("AllStatsOutput_New_Rep1_100-1000.csv",
 				"AllStatsOutput_Newest_Rep9_100-1000.csv",
 				"AllStatsOutput_Newest_Rep10_100-1000.csv",
 				"AllStatsOutput_Newest_Rep11_100-1000.csv",
-				"AllStatsOutput_Newest_Rep12_100-1000.csv"#,
-				# "AllStatsOutput_Newest_Rep13_100-1000.csv",
-				# "AllStatsOutput_Newest_Rep14_100-1000.csv",
-				# "AllStatsOutput_Newest_Rep15_100-1000.csv",
-				# "AllStatsOutput_Newest_Rep16_100-1000.csv",
-				# "AllStatsOutput_Newest_Rep17_100-1000.csv",
-				# "AllStatsOutput_Newest_Rep18_100-1000.csv",
-				# "AllStatsOutput_Newest_Rep19_100-1000.csv",
-				# "AllStatsOutput_Newest_Rep20_100-1000.csv"
+				"AllStatsOutput_Newest_Rep12_100-1000.csv",
+				"AllStatsOutput_Newest_Rep13_100-1000.csv",
+				"AllStatsOutput_Newest_Rep14_100-1000.csv",
+				"AllStatsOutput_Newest_Rep15_100-1000.csv",
+				"AllStatsOutput_Newest_Rep16_100-1000.csv",
+				"AllStatsOutput_Newest_Rep17_100-1000.csv",
+				"AllStatsOutput_Newest_Rep18_100-1000.csv",
+				"AllStatsOutput_Newest_Rep19_100-1000.csv",
+				"AllStatsOutput_Newest_Rep20_100-1000.csv"
 				)
 infiles.b <- c("RF_Eucl_results_New_Rep1_100-1000.txt",
 				"RF_Eucl_results_New_Rep2_100-1000.txt",
@@ -105,19 +105,19 @@ infiles.b <- c("RF_Eucl_results_New_Rep1_100-1000.txt",
 				"RF_Eucl_results_New_Rep9_100-1000.txt",
 				"RF_Eucl_results_New_Rep10_100-1000.txt",
 				"RF_Eucl_results_New_Rep11_100-1000.txt",
-				"RF_Eucl_results_New_Rep12_100-1000.txt"#,
-				# "RF_Eucl_results_New_Rep13_100-1000.txt",
-				# "RF_Eucl_results_New_Rep14_100-1000.txt",
-				# "RF_Eucl_results_New_Rep15_100-1000.txt",
-				# "RF_Eucl_results_New_Rep16_100-1000.txt",
-				# "RF_Eucl_results_New_Rep17_100-1000.txt",
-				# "RF_Eucl_results_New_Rep18_100-1000.txt",
-				# "RF_Eucl_results_New_Rep19_100-1000.txt",
-				# "RF_Eucl_results_New_Rep20_100-1000.txt"
+				"RF_Eucl_results_New_Rep12_100-1000.txt",
+				"RF_Eucl_results_New_Rep13_100-1000.txt",
+				"RF_Eucl_results_New_Rep14_100-1000.txt",
+				"RF_Eucl_results_New_Rep15_100-1000.txt",
+				"RF_Eucl_results_New_Rep16_100-1000.txt",
+				"RF_Eucl_results_New_Rep17_100-1000.txt",
+				"RF_Eucl_results_New_Rep18_100-1000.txt",
+				"RF_Eucl_results_New_Rep19_100-1000.txt",
+				"RF_Eucl_results_New_Rep20_100-1000.txt"
 				)
 
 dat <- NULL
-for(i in 1:length(infiles.a)){
+for(i in 1:15){#length(infiles.a)){ #**************UNCOMMENT ME FOR ALL REPS
 	temp.dat1 <- read.csv(infiles.a[i], header=TRUE, stringsAsFactors=FALSE)
 	temp.dat1$uniqueID <- paste(temp.dat1$species, temp.dat1$samp.size, temp.dat1$search.algo, temp.dat1$part.IC, sep="_")
 	temp.dat2 <- read.table(infiles.b[i], header=TRUE, stringsAsFactors=FALSE)

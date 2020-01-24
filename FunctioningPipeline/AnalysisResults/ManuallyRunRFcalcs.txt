@@ -4,19 +4,19 @@ run_path='/scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/Scripts_For_Runni
 lophoFiles=${outdir}maxtree_lopho_*.nwk
 myriaFiles=${outdir}maxtree_myria_*.nwk
 
-echo "filename rf_dist eucl_dist" > ${outdir}RF_Eucl_results_New_Rep11_100-1000.txt
+echo "filename rf_dist eucl_dist" > ${outdir}RF_Eucl_results_New_Rep17_100-1000.txt
 
 ##conda activate my_python3
 
 # lopho
 for f in $lophoFiles;
     do
-    python ${run_path}OutputAnalysis_RF-Euc.py ${outdir}RealTree_lopho.nwk ${f} >> ${outdir}RF_Eucl_results_New_Rep11_100-1000.txt
+    python ${run_path}OutputAnalysis_RF-Euc.py ${outdir}RealTree_lopho.nwk ${f} >> ${outdir}RF_Eucl_results_New_Rep17_100-1000.txt
 done
 
 # myria
 for f in $myriaFiles;
     do
-    python ${run_path}OutputAnalysis_RF-Euc.py ${outdir}RealTree_myria.nwk ${f} >> ${outdir}RF_Eucl_results_New_Rep11_100-1000.txt
+    python ${run_path}OutputAnalysis_RF-Euc.py ${outdir}RealTree_myria.nwk ${f} >> ${outdir}RF_Eucl_results_New_Rep17_100-1000.txt
 done
 

@@ -117,7 +117,7 @@ infiles.b <- c("RF_Eucl_results_New_Rep1_100-1000.txt",
 				)
 
 dat <- NULL
-for(i in 1:15){#length(infiles.a)){ #**************UNCOMMENT ME FOR ALL REPS
+for(i in 1:length(infiles.a)){ #**************UNCOMMENT ME FOR ALL REPS
 	temp.dat1 <- read.csv(infiles.a[i], header=TRUE, stringsAsFactors=FALSE)
 	temp.dat1$uniqueID <- paste(temp.dat1$species, temp.dat1$samp.size, temp.dat1$search.algo, temp.dat1$part.IC, sep="_")
 	temp.dat2 <- read.table(infiles.b[i], header=TRUE, stringsAsFactors=FALSE)
@@ -191,6 +191,7 @@ text(2.5,ytext1, expression(italic("partitioning better")), cex=1, col="green4")
 text(2.5,-ytext1, expression(italic("no partitioning better")), cex=1, col="red3")
 for(i in 1:4){
 	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="lopho", partitioning.criterion=part.crit, distance="rf_dist")
+	print(c(i, plot.dat))
 	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
 	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
@@ -210,6 +211,7 @@ text(2.5,-ytext1, expression(italic("no partitioning better")), cex=1, col="red3
 for(i in 1:4){
 	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="myria", partitioning.criterion=part.crit, distance="rf_dist")
 	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
+	print(c(i, plot.dat))
 	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
 text(x=c(0.65,1:4), y=rep(0.125, 5), cex=0.75, c(expression(italic("p")*" = "), 
@@ -227,6 +229,7 @@ text(2.5,-ytext2, expression(italic("no partitioning better")), cex=1, col="red3
 for(i in 1:4){
 	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="lopho", partitioning.criterion=part.crit, distance="eucl_dist")
 	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
+	print(c(i, plot.dat))
 	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
 text(x=c(0.65,1:4), y=rep(1.25, 5), cex=0.75, c(expression(italic("p")*" = "), 
@@ -244,6 +247,7 @@ text(2.5,-ytext2, expression(italic("no partitioning better")), cex=1, col="red3
 for(i in 1:4){
 	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="myria", partitioning.criterion=part.crit, distance="eucl_dist")
 	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
+	print(c(i, plot.dat))
 	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
 text(x=c(0.65,1:4), y=rep(1.25, 5), cex=0.75, c(expression(italic("p")*" = "), 

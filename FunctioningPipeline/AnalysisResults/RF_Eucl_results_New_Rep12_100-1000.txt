@@ -12,7 +12,9 @@ AnalysisResults/maxtree_lopho_40_rclusterAICc.nwk 0.1694915254237288 1216.311580
 AnalysisResults/maxtree_lopho_40_rclusterAIC.nwk 0.13559322033898305 1216.3133615667168
 AnalysisResults/maxtree_lopho_40_rclusterBIC.nwk 0.13559322033898305 1216.2646387862665
 AnalysisResults/maxtree_lopho_80_noPart.nwk 0.05084745762711865 1215.656616946267
+AnalysisResults/maxtree_lopho_80_rclusterAICc.nwk 0.05084745762711865 1215.6557164280382
 AnalysisResults/maxtree_lopho_80_rclusterAIC.nwk 0.05084745762711865 1215.6554977997923
+AnalysisResults/maxtree_lopho_80_rclusterBIC.nwk 0.05084745762711865 1215.655819432033
 AnalysisResults/maxtree_myria_10_noPart.nwk 0.45454545454545453 1283.3984343582872
 AnalysisResults/maxtree_myria_10_rclusterAICc.nwk 0.45454545454545453 1283.403820909206
 AnalysisResults/maxtree_myria_10_rclusterAIC.nwk 0.45454545454545453 1283.2653495002144

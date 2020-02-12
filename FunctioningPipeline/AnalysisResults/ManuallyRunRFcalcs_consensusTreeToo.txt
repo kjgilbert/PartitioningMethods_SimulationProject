@@ -4,7 +4,8 @@ run_path='/scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/Scripts_For_Runni
 lophoFiles=${outdir}maxtree_lopho_*.nwk
 myriaFiles=${outdir}maxtree_myria_*.nwk
 
-outfilename='RF_Eucl_results_New_Rep9_100-1000_wConsensus.txt'
+
+outfilename='RF_Eucl_results_New_Rep28_100-1000_wConsensus.txt'
 
 
 echo "filename rf_dist eucl_dist" > ${outdir}${outfilename}

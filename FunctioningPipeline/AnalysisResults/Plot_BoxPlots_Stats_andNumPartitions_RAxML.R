@@ -15,13 +15,13 @@ make.merge.id <- function(dat){
 		if(length(grep("40", dat$file[i])) > 0) samp <- "40_"
 		if(length(grep("80", dat$file[i])) > 0) samp <- "80_"
 		
-		if(length(grep("rcluster", dat$file[i])) > 0) algo <- "rcluster_"
-		if(length(grep("greedy", dat$file[i])) > 0) algo <- "greedy_"
-		if(length(grep("noPart", dat$file[i])) > 0) algo <- "noPart_"
+		if(length(grep("_r-", dat$file[i])) > 0) algo <- "rcluster_"
+		if(length(grep("_g-", dat$file[i])) > 0) algo <- "greedy_"
+		if(length(grep("_noPart", dat$file[i])) > 0) algo <- "noPart_"
 	
-		if(length(grep("AIC", dat$file[i])) > 0) crit <- "AIC"
-		if(length(grep("AICc", dat$file[i])) > 0) crit <- "AICc"
-		if(length(grep("BIC", dat$file[i])) > 0) crit <- "BIC"
+		if(length(grep("-a/", dat$file[i])) > 0) crit <- "AIC"
+		if(length(grep("-c/", dat$file[i])) > 0) crit <- "AICc"
+		if(length(grep("-b/", dat$file[i])) > 0) crit <- "BIC"
 		if(length(grep("noPart", dat$file[i])) > 0) crit <- "noPart"
 		
 		id.col[i] <- paste(c(spp, samp, algo, crit), collapse="")
@@ -137,41 +137,41 @@ infiles.a <- c("AllStatsOutput_New_Rep1_100-1000.csv",
 				"AllStatsOutput_Newest_Rep34_100-1000.csv",
 				"AllStatsOutput_Newest_Rep35_100-1000.csv"
 				)
-infiles.b <- c("RF_Eucl_results_New_Rep1_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep2_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep3_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep4_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep5_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep6_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep7_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep8_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep9_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep10_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep11_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep12_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep13_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep14_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep15_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep16_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep17_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep18_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep19_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep20_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep21_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep22_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep23_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep24_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep25_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep26_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep27_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep28_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep29_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep30_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep31_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep32_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep33_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep34_100-1000_wConsensus.txt",
-				"RF_Eucl_results_New_Rep35_100-1000_wConsensus.txt"
+infiles.b <- c("RF_Eucl_results_New_Rep1_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep2_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep3_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep4_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep5_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep6_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep7_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep8_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep9_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep10_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep11_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep12_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep13_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep14_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep15_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep16_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep17_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep18_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep19_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep20_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep21_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep22_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep23_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep24_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep25_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep26_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep27_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep28_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep29_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep30_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep31_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep32_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep33_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep34_100-1000_RAxML.txt",
+				"RF_Eucl_results_New_Rep35_100-1000_RAxML.txt"
 				)
 
 dat <- NULL
@@ -179,9 +179,6 @@ for(i in c(1:length(infiles.a))){ #**************UNCOMMENT ME FOR ALL REPS
 	temp.dat1 <- read.csv(infiles.a[i], header=TRUE, stringsAsFactors=FALSE)
 	temp.dat1$uniqueID <- paste(temp.dat1$species, temp.dat1$samp.size, temp.dat1$search.algo, temp.dat1$part.IC, sep="_")
 	temp.dat2 <- read.table(infiles.b[i], header=TRUE, stringsAsFactors=FALSE)
-	# because also have consenseus trees now:
-	temp.dat2 <- cbind(temp.dat2[1:32,], temp.dat2[33:64, 2:3])
-	names(temp.dat2) <- c("filename", "rf_dist", "eucl_dist", "cons_rf_dist", "cons_eucl_dist")
 	temp.dat2$uniqueID <- make.merge.id(temp.dat2)
 	temp.dat <- merge(temp.dat1, temp.dat2, by="uniqueID")
 	temp.dat$gene.size <- 100
@@ -199,8 +196,8 @@ no.part.dat <- dat[dat$part.IC == "noPart" ,]
 
 spp <- c("myria", "lopho")
 samps <- c(10,20,40,80)
-stat.data.set.BIC <- data.frame(matrix(NA, ncol=14, nrow=8))
-names(stat.data.set.BIC) <- c("species", "samp.size", "rf_twoside_p", "rf_less_p", "rf_greater_p", "eucl_twoside_p", "eucl_less_p", "eucl_greater_p", "cons_rf_twoside_p", "cons_rf_less_p", "cons_rf_greater_p", "cons_eucl_twoside_p", "cons_eucl_less_p", "cons_eucl_greater_p")
+stat.data.set.BIC <- data.frame(matrix(NA, ncol=8, nrow=8))
+names(stat.data.set.BIC) <- c("species", "samp.size", "rf_twoside_p", "rf_less_p", "rf_greater_p", "eucl_twoside_p", "eucl_less_p", "eucl_greater_p")
 
 iterate <- 1
 for(j in spp){
@@ -215,16 +212,7 @@ for(j in spp){
 		eucl_less_p <- wilcox.test(temp.dat.no.part$eucl_dist, temp.dat.part$eucl_dist, paired=TRUE, alternative="less")$p.value # is the euclidean distance smaller in no part vs partitioned?
 		eucl_greater_p <- wilcox.test(temp.dat.no.part$eucl_dist, temp.dat.part$eucl_dist, paired=TRUE, alternative="greater")$p.value # is the euclidean distance smaller in partitioned trees?
 
-		# also for the consensus tree
-		cons_rf_ts_p <- wilcox.test(temp.dat.no.part$cons_rf_dist, temp.dat.part$cons_rf_dist, paired=TRUE, alternative="two.sided")$p.value # is there a significant diff?
-		cons_rf_less_p <- wilcox.test(temp.dat.no.part$cons_rf_dist, temp.dat.part$cons_rf_dist, paired=TRUE, alternative="less")$p.value # is the rf distance smaller in no part vs partitioned?
-		cons_rf_greater_p <- wilcox.test(temp.dat.no.part$cons_rf_dist, temp.dat.part$cons_rf_dist, paired=TRUE, alternative="greater")$p.value # is the rf distance smaller in partitioned trees?
-		cons_eucl_ts_p <- wilcox.test(temp.dat.no.part$cons_eucl_dist, temp.dat.part$cons_eucl_dist, paired=TRUE, alternative="two.sided")$p.value
-		cons_eucl_less_p <- wilcox.test(temp.dat.no.part$cons_eucl_dist, temp.dat.part$cons_eucl_dist, paired=TRUE, alternative="less")$p.value # is the euclidean distance smaller in no part vs partitioned?
-		cons_eucl_greater_p <- wilcox.test(temp.dat.no.part$cons_eucl_dist, temp.dat.part$cons_eucl_dist, paired=TRUE, alternative="greater")$p.value # is the euclidean distance smaller in partitioned trees?
-
-
-		stat.data.set.BIC[iterate, ] <- c(j, k, rf_ts_p, rf_less_p, rf_greater_p, eucl_ts_p, eucl_less_p, eucl_greater_p, cons_rf_ts_p, cons_rf_less_p, cons_rf_greater_p, cons_eucl_ts_p, cons_eucl_less_p, cons_eucl_greater_p)
+		stat.data.set.BIC[iterate, ] <- c(j, k, rf_ts_p, rf_less_p, rf_greater_p, eucl_ts_p, eucl_less_p, eucl_greater_p)
 		iterate <- iterate + 1
 	}
 }
@@ -235,10 +223,8 @@ for(j in spp){
 
 ## AIC STATS
 
-spp <- c("myria", "lopho")
-samps <- c(10,20,40,80)
-stat.data.set.AIC <- data.frame(matrix(NA, ncol=14, nrow=8))
-names(stat.data.set.AIC) <- c("species", "samp.size", "rf_twoside_p", "rf_less_p", "rf_greater_p", "eucl_twoside_p", "eucl_less_p", "eucl_greater_p", "cons_rf_twoside_p", "cons_rf_less_p", "cons_rf_greater_p", "cons_eucl_twoside_p", "cons_eucl_less_p", "cons_eucl_greater_p")
+stat.data.set.AIC <- data.frame(matrix(NA, ncol=8, nrow=8))
+names(stat.data.set.AIC) <- c("species", "samp.size", "rf_twoside_p", "rf_less_p", "rf_greater_p", "eucl_twoside_p", "eucl_less_p", "eucl_greater_p")
 
 iterate <- 1
 for(j in spp){
@@ -253,16 +239,7 @@ for(j in spp){
 		eucl_less_p <- wilcox.test(temp.dat.no.part$eucl_dist, temp.dat.part$eucl_dist, paired=TRUE, alternative="less")$p.value # is the euclidean distance smaller in no part vs partitioned?
 		eucl_greater_p <- wilcox.test(temp.dat.no.part$eucl_dist, temp.dat.part$eucl_dist, paired=TRUE, alternative="greater")$p.value # is the euclidean distance smaller in partitioned trees?
 
-		# also for the consensus tree
-		cons_rf_ts_p <- wilcox.test(temp.dat.no.part$cons_rf_dist, temp.dat.part$cons_rf_dist, paired=TRUE, alternative="two.sided")$p.value # is there a significant diff?
-		cons_rf_less_p <- wilcox.test(temp.dat.no.part$cons_rf_dist, temp.dat.part$cons_rf_dist, paired=TRUE, alternative="less")$p.value # is the rf distance smaller in no part vs partitioned?
-		cons_rf_greater_p <- wilcox.test(temp.dat.no.part$cons_rf_dist, temp.dat.part$cons_rf_dist, paired=TRUE, alternative="greater")$p.value # is the rf distance smaller in partitioned trees?
-		cons_eucl_ts_p <- wilcox.test(temp.dat.no.part$cons_eucl_dist, temp.dat.part$cons_eucl_dist, paired=TRUE, alternative="two.sided")$p.value
-		cons_eucl_less_p <- wilcox.test(temp.dat.no.part$cons_eucl_dist, temp.dat.part$cons_eucl_dist, paired=TRUE, alternative="less")$p.value # is the euclidean distance smaller in no part vs partitioned?
-		cons_eucl_greater_p <- wilcox.test(temp.dat.no.part$cons_eucl_dist, temp.dat.part$cons_eucl_dist, paired=TRUE, alternative="greater")$p.value # is the euclidean distance smaller in partitioned trees?
-
-
-		stat.data.set.AIC[iterate, ] <- c(j, k, rf_ts_p, rf_less_p, rf_greater_p, eucl_ts_p, eucl_less_p, eucl_greater_p, cons_rf_ts_p, cons_rf_less_p, cons_rf_greater_p, cons_eucl_ts_p, cons_eucl_less_p, cons_eucl_greater_p)
+		stat.data.set.AIC[iterate, ] <- c(j, k, rf_ts_p, rf_less_p, rf_greater_p, eucl_ts_p, eucl_less_p, eucl_greater_p)
 		iterate <- iterate + 1
 	}
 }
@@ -274,10 +251,8 @@ for(j in spp){
 
 ### AICc STATS
 
-spp <- c("myria", "lopho")
-samps <- c(10,20,40,80)
-stat.data.set.AICc <- data.frame(matrix(NA, ncol=14, nrow=8))
-names(stat.data.set.AICc) <- c("species", "samp.size", "rf_twoside_p", "rf_less_p", "rf_greater_p", "eucl_twoside_p", "eucl_less_p", "eucl_greater_p", "cons_rf_twoside_p", "cons_rf_less_p", "cons_rf_greater_p", "cons_eucl_twoside_p", "cons_eucl_less_p", "cons_eucl_greater_p")
+stat.data.set.AICc <- data.frame(matrix(NA, ncol=8, nrow=8))
+names(stat.data.set.AICc) <- c("species", "samp.size", "rf_twoside_p", "rf_less_p", "rf_greater_p", "eucl_twoside_p", "eucl_less_p", "eucl_greater_p")
 
 iterate <- 1
 for(j in spp){
@@ -292,16 +267,7 @@ for(j in spp){
 		eucl_less_p <- wilcox.test(temp.dat.no.part$eucl_dist, temp.dat.part$eucl_dist, paired=TRUE, alternative="less")$p.value # is the euclidean distance smaller in no part vs partitioned?
 		eucl_greater_p <- wilcox.test(temp.dat.no.part$eucl_dist, temp.dat.part$eucl_dist, paired=TRUE, alternative="greater")$p.value # is the euclidean distance smaller in partitioned trees?
 
-		# also for the consensus tree
-		cons_rf_ts_p <- wilcox.test(temp.dat.no.part$cons_rf_dist, temp.dat.part$cons_rf_dist, paired=TRUE, alternative="two.sided")$p.value # is there a significant diff?
-		cons_rf_less_p <- wilcox.test(temp.dat.no.part$cons_rf_dist, temp.dat.part$cons_rf_dist, paired=TRUE, alternative="less")$p.value # is the rf distance smaller in no part vs partitioned?
-		cons_rf_greater_p <- wilcox.test(temp.dat.no.part$cons_rf_dist, temp.dat.part$cons_rf_dist, paired=TRUE, alternative="greater")$p.value # is the rf distance smaller in partitioned trees?
-		cons_eucl_ts_p <- wilcox.test(temp.dat.no.part$cons_eucl_dist, temp.dat.part$cons_eucl_dist, paired=TRUE, alternative="two.sided")$p.value
-		cons_eucl_less_p <- wilcox.test(temp.dat.no.part$cons_eucl_dist, temp.dat.part$cons_eucl_dist, paired=TRUE, alternative="less")$p.value # is the euclidean distance smaller in no part vs partitioned?
-		cons_eucl_greater_p <- wilcox.test(temp.dat.no.part$cons_eucl_dist, temp.dat.part$cons_eucl_dist, paired=TRUE, alternative="greater")$p.value # is the euclidean distance smaller in partitioned trees?
-
-
-		stat.data.set.AICc[iterate, ] <- c(j, k, rf_ts_p, rf_less_p, rf_greater_p, eucl_ts_p, eucl_less_p, eucl_greater_p, cons_rf_ts_p, cons_rf_less_p, cons_rf_greater_p, cons_eucl_ts_p, cons_eucl_less_p, cons_eucl_greater_p)
+		stat.data.set.AICc[iterate, ] <- c(j, k, rf_ts_p, rf_less_p, rf_greater_p, eucl_ts_p, eucl_less_p, eucl_greater_p)
 		iterate <- iterate + 1
 	}
 }
@@ -337,12 +303,10 @@ if(criterion == "BIC") stat.data.set <- stat.data.set.BIC
 if(criterion == "AICc") stat.data.set <- stat.data.set.AICc
 part.crit <- criterion
 
-pdf(paste(c("Results_Plots/Boxplots_", part.crit, "_StatsParts.pdf"), collapse=""), width=6, height=10)
-##par(mfrow=c(3,1), mar=c(2.5,4.25,1.75,0.25))
+
+pdf(paste(c("Results_Plots/Boxplots_RAxML_", part.crit, "_StatsParts.pdf"), collapse=""), width=6, height=10)
 par(mar=c(2.5,4.25,1.75,0.25))
 layout(matrix(c(1,1,2,2,3), ncol=1))
-
-
 
 plot(0, type="n", xlim=c(0.5,9), ylim=ylim1, xlab="", xaxt="n", ylab="difference in distance from true tree", main="Robinson Fould distance", mgp=c(3,0.9,0))
 axis(side=1, at=c(2.5, 7), c("Lophotrochozoa (62 spp)", "Myriapoda (25 spp)"))
@@ -361,7 +325,6 @@ text(x=c(0.5,1:4), y=rep(p.height1, 5), cex=text.size, c(expression(italic("p")*
 	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 20][1]), digits=2),
 	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 40][1]), digits=2),
 	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 80][1]), digits=2)))
-
 for(i in 1:4){
 	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="myria", partitioning.criterion=part.crit, distance="rf_dist")
 #	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
@@ -372,7 +335,6 @@ text(x=1:4+4.5, y=rep(p.height1, 4), cex=text.size, c(
 	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 20][1]), digits=2),
 	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 40][1]), digits=2),
 	format(as.numeric(stat.data.set$rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 80][1]), digits=2)))
-
 legend("bottomright", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", cex=0.875, pt.cex=1.5) # , bg="white"
 
 
@@ -385,7 +347,6 @@ text(4.25,ytext2, expression(italic("partitioning better")), cex=1, col="green4"
 text(4.25,-ytext2, expression(italic("no partitioning better")), cex=1, col="red3")
 for(i in 1:4){
 	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="lopho", partitioning.criterion=part.crit, distance="eucl_dist")
-#	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
 	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
 text(x=c(0.5,1:4), y=rep(p.height2, 5), cex=text.size, c(expression(italic("p")*" = "), 
@@ -393,10 +354,8 @@ text(x=c(0.5,1:4), y=rep(p.height2, 5), cex=text.size, c(expression(italic("p")*
 	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 20][1]), digits=2),
 	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 40][1]), digits=2),
 	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 80][1]), digits=2)))
-
 for(i in 1:4){
 	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="myria", partitioning.criterion=part.crit, distance="eucl_dist")
-#	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
 	boxplot(plot.dat, add=TRUE, at=i+4.5, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
 text(x=1:4+4.5, y=rep(p.height2, 4), cex=text.size, c(
@@ -404,7 +363,6 @@ text(x=1:4+4.5, y=rep(p.height2, 4), cex=text.size, c(
 	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 20][1]), digits=2),
 	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 40][1]), digits=2),
 	format(as.numeric(stat.data.set$eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 80][1]), digits=2)))
-
 
 
 # number partitions
@@ -421,91 +379,6 @@ for(i in 1:4){
 	boxplot(part.dat, add=TRUE, at=i+4.5, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 }
 
-
-
-
-
-# AND NOW USING CONSENSUS TREE DISTANCE INSTEAD
-
-par(mar=c(2.5,4.25,1.75,0.25))
-
-plot(0, type="n", xlim=c(0.5,9), ylim=ylim1, xlab="", xaxt="n", ylab="difference in distance from true tree", main="Robinson Fould distance", mgp=c(3,0.9,0))
-axis(side=1, at=c(2.5, 7), c("Lophotrochozoa (62 spp)", "Myriapoda (25 spp)"))
-mtext(side=2, "(no partitioning - partitioning)", cex=0.75, line=2)
-abline(h=0, col="gray75", lty=3, lwd=1.5)
-text(4.25,ytext1, expression(italic("partitioning better")), cex=1, col="green4")
-text(4.25,-ytext1, expression(italic("no partitioning better")), cex=1, col="red3")
-for(i in 1:4){
-	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="lopho", partitioning.criterion=part.crit, distance="cons_rf_dist")
-#	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
-	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
-}
-# add p values from 2-sided wilcoxon test
-text(x=c(0.5,1:4), y=rep(p.height1, 5), cex=text.size, c(expression(italic("p")*" = "), 
-	format(as.numeric(stat.data.set$cons_rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 10][1]), digits=2), 
-	format(as.numeric(stat.data.set$cons_rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 20][1]), digits=2),
-	format(as.numeric(stat.data.set$cons_rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 40][1]), digits=2),
-	format(as.numeric(stat.data.set$cons_rf_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 80][1]), digits=2)))
-
-for(i in 1:4){
-	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="myria", partitioning.criterion=part.crit, distance="cons_rf_dist")
-#	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
-	boxplot(plot.dat, add=TRUE, at=i+4.5, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
-}
-text(x=1:4+4.5, y=rep(p.height1, 4), cex= text.size, c(
-	format(as.numeric(stat.data.set$cons_rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 10][1]), digits=2), 
-	format(as.numeric(stat.data.set$cons_rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 20][1]), digits=2),
-	format(as.numeric(stat.data.set$cons_rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 40][1]), digits=2),
-	format(as.numeric(stat.data.set$cons_rf_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 80][1]), digits=2)))
-
-legend("bottomright", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", cex=0.875, pt.cex=1.5) # , bg="white"
-
-
-# eucl distance
-plot(0, type="n", xlim=c(0.5,9), ylim=ylim2, xlab="", xaxt="n", ylab="difference in distance from true tree", main="Euclidean distance", mgp=c(3,0.9,0))
-mtext(side=2, "(no partitioning - partitioning)", cex=0.75, line=2)
-axis(side=1, at=c(2.5, 7), c("Lophotrochozoa (62 spp)", "Myriapoda (25 spp)"))
-abline(h=0, col="gray75", lty=3, lwd=1.5)
-text(4.25,ytext2, expression(italic("partitioning better")), cex=1, col="green4")
-text(4.25,-ytext2, expression(italic("no partitioning better")), cex=1, col="red3")
-for(i in 1:4){
-	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="lopho", partitioning.criterion=part.crit, distance="cons_eucl_dist")
-#	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
-	boxplot(plot.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
-}
-text(x=c(0.5,1:4), y=rep(p.height2, 5), cex=text.size, c(expression(italic("p")*" = "), 
-	format(as.numeric(stat.data.set$cons_eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 10][1]), digits=2), 
-	format(as.numeric(stat.data.set$cons_eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 20][1]), digits=2),
-	format(as.numeric(stat.data.set$cons_eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 40][1]), digits=2),
-	format(as.numeric(stat.data.set$cons_eucl_twoside_p[stat.data.set$species == "lopho" & stat.data.set$samp.size == 80][1]), digits=2)))
-
-for(i in 1:4){
-	plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp="myria", partitioning.criterion=part.crit, distance="cons_eucl_dist")
-#	if(is.na(unique(plot.dat)) & length(unique(plot.dat)) == 1) next
-	boxplot(plot.dat, add=TRUE, at=i+4.5, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
-}
-text(x=1:4+4.5, y=rep(p.height2, 4), cex=text.size, c(
-	format(as.numeric(stat.data.set$cons_eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 10][1]), digits=2), 
-	format(as.numeric(stat.data.set$cons_eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 20][1]), digits=2),
-	format(as.numeric(stat.data.set$cons_eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 40][1]), digits=2),
-	format(as.numeric(stat.data.set$cons_eucl_twoside_p[stat.data.set$species == "myria" & stat.data.set$samp.size == 80][1]), digits=2)))
-
-#SAME # number partitions
-par(mar=c(2.5,4.25,0.25,0.25))
-plot(0, type="n", xlim=c(0.5,9), ylim=ylim3, xlab="", xaxt="n", ylab="number partitions inferred", main="", mgp=c(3,0.9,0))
-axis(side=1, at=c(2.5, 7), c("Lophotrochozoa (62 spp)", "Myriapoda (25 spp)"))
-for(i in 1:4){
-	part.dat <- get.partition.dat(dat=dat, samp.size=samp.sizes[i], spp="lopho", partitioning.criterion=part.crit)
-	boxplot(part.dat, add=TRUE, at=i, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
-}
-for(i in 1:4){
-	part.dat <- get.partition.dat(dat=dat, samp.size=samp.sizes[i], spp="myria", partitioning.criterion=part.crit)
-	boxplot(part.dat, add=TRUE, at=i+4.5, pch=23, col=samp.size.col[i], border=outline.col, width=box.width, lty=line.type, lwd=line.width, axes=FALSE)
-}
-
-
 dev.off()
-
-
 
 }

@@ -1,0 +1,27 @@
+outdir='AnalysisResults/'
+run_path='/scratch/axiom/FAC/FBM/DBC/cdessim2/default/kgilbert/Scripts_For_Running/'
+
+lophoFiles=part_*_lopho*/RAxML_bestTree.raxml_tree.out
+myriaFiles=part_*_myria*/RAxML_bestTree.raxml_tree.out
+
+
+outfilename='RF_Eucl_results_N10_Rep10_RAxML.txt'
+
+
+echo "filename rf_dist eucl_dist" > ${outdir}${outfilename}
+
+##conda activate my_python3
+
+# lopho
+for f in $lophoFiles;
+    do
+    sed 's:/:_:g' ${f} > RAxML_formatted_bestTree.txt
+    python ${run_path}OutputAnalysis_RF-Euc_RAxML.py ${outdir}RealTree_lopho.nwk RAxML_formatted_bestTree.txt $f >> ${outdir}${outfilename}
+done
+
+# myria
+for f in $myriaFiles;
+    do
+    sed 's:/:_:g' ${f} > RAxML_formatted_bestTree.txt
+    python ${run_path}OutputAnalysis_RF-Euc_RAxML.py ${outdir}RealTree_myria.nwk RAxML_formatted_bestTree.txt $f >> ${outdir}${outfilename}
+done

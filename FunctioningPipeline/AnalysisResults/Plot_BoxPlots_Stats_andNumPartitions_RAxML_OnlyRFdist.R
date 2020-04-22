@@ -339,42 +339,22 @@ no.part.dat <- dat[dat$part.IC == "noPart" ,]
 
 
 
+
 ####################################
 
 plot.function <- function(dat, dataset, tree.distance, x.spot.adjustment, p.height, p.height.factor){
 	if(dataset == "lopho"){
-		text(x=0.3, y=p.height+p.height.factor, "n=", cex=text.size)
-		text(x=0.3, y=p.height, "p=", cex=text.size)
+#		text(x=0.3, y=p.height+p.height.factor, "n=", cex=text.size)
+		text(x=0.3, y=p.height, "p =", cex=text.size)
 	}
 	for(i in 1:4){
-		x.spot1 <- i + x.spot.adjustment - 0.2
-		x.spot2 <- i + x.spot.adjustment + 0.2
+		x.spot <- i + x.spot.adjustment
 		plot.dat <- get.boxplot.dat(dat=dat, samp.size=samp.sizes[i], spp=dataset, partitioning.criterion=part.crit, distance=tree.distance)
-		one.partition.dat <- plot.dat[plot.dat$num.parts == 1 ,]
-		more.partitions.dat <- plot.dat[plot.dat$num.parts > 1 ,]
-		if(dim(one.partition.dat)[1] > 0){
-			 boxplot(one.partition.dat$distance, add=TRUE, at=x.spot1, pch=23, col=samp.size.col[i], border=outline.col, boxwex=box.width, lty=line.type, lwd=line.width, axes=FALSE)
-		}else{
-			#points(x.spot1, p.height, col="gray90", pch=15, cex=3)
-		}
-		if(dim(more.partitions.dat)[1] > 0){
-			boxplot(more.partitions.dat$distance, add=TRUE, at=x.spot2, pch=23, col=samp.size.col[i], border=outline.col, boxwex=box.width, lty=line.type, lwd=line.width, axes=FALSE)
-		}else{
-			#
-		}
-		text(x=x.spot1, y=p.height+p.height.factor, paste(dim(one.partition.dat)[1]), cex=text.size, srt=45)
-		text(x=x.spot2, y=p.height+p.height.factor, paste(dim(more.partitions.dat)[1]), cex=text.size, srt=45)
+		boxplot(plot.dat$distance, add=TRUE, at=x.spot, pch=23, col=samp.size.col[i], border=outline.col, boxwex=box.width, lty=line.type, lwd=line.width, axes=FALSE)
 		
-		if(dim(one.partition.dat)[1] > 0){
-			text(x=x.spot1, y=p.height, format(as.numeric(wilcox.test(one.partition.dat$no.part.raw, one.partition.dat$part.raw, paired=TRUE, alternative="two.sided")$p.value), digits=2), cex=text.size, srt=45)
-		}else{
-			text(x=x.spot1, y=p.height, "-", cex=text.size, srt=45)
-		}
-		if(dim(more.partitions.dat)[1] > 0){
-			text(x=x.spot2, y=p.height, format(as.numeric(wilcox.test(more.partitions.dat$no.part.raw, more.partitions.dat$part.raw, paired=TRUE, alternative="two.sided")$p.value), digits=2), cex=text.size, srt=45)
-		}else{
-			text(x=x.spot1, y=p.height, "-", cex=text.size, srt=45)
-		}
+#		text(x=x.spot, y=p.height+p.height.factor, paste(dim(plot.dat)[1]), cex=text.size, srt=45)
+		
+		text(x=x.spot, y=p.height, format(as.numeric(wilcox.test(plot.dat$no.part.raw, plot.dat$part.raw, paired=TRUE, alternative="two.sided")$p.value), digits=2), cex=text.size, srt=45)
 	}
 }
 ####################################
@@ -389,26 +369,19 @@ plot.function <- function(dat, dataset, tree.distance, x.spot.adjustment, p.heig
 
 ####################################
 samp.size.col <- c("steelblue4", "darkorange2", "green4", "red3")
-opac <- 0.5
+opac <- 0.75
 outline.col <- "gray30"
 samp.sizes <- c(10,20,40,80)
 ####################################
-ylim1 <- c(-0.25, 0.25)
+ylim1 <- c(-0.225, 0.25)
 #ylim1 <- c(-0.1, 0.1)
-#ylim2 <- c(-1.35, 1.35)
-ylim2 <- c(-2.25, 2.25)
-ylim3 <- c(0.5,8)
-box.width <- 0.75
+box.width <- 1.5
 line.type <- 1
 line.width <- 1.5
-ytext1 <- 0.25
-ytext2 <- 1.4
-p.height1 <- 0.1
-p.height.factor1=0.05
-#p.height2 <- 1.375
-p.height2 <- 1.075
-p.height.factor2=0.2
-text.size <- 0.825
+ytext1 <- 0.15
+p.height1 <- 0.25
+p.height.factor1=0.04
+text.size <- 0.85
 
 
 #criteria <- c("AIC", "BIC", "AICc")
@@ -421,59 +394,41 @@ if(criterion == "BIC") stat.data.set <- stat.data.set.BIC
 if(criterion == "AICc") stat.data.set <- stat.data.set.AICc
 part.crit <- criterion
 
-pdf(paste(c("Results_Plots/Boxplots_", part.crit, "_IQtree-RAxML_split.pdf"), collapse=""), width=8, height=10)
-par(mar=c(2.5,4.25,1.75,0.25))
-layout(matrix(c(1,1,3,3,1,1,3,3,1,1,3,3,2,2,4,4,2,2,4,4,2,2,4,4,5,5,5,5), ncol=4, byrow=TRUE))
-
+pdf(paste(c("Results_Plots/Boxplots_RAxML_", part.crit, "_StatsParts_onlyRFdist.pdf"), collapse=""), width=8, height=4)
+par(mar=c(2.5,1.95,1.75,0.25))#, mfrow=c(1,2))
+layout(matrix(c(1,2,2,2,2,2,2,2,3,3,3,3,3,3,3), nrow=1))
 
 #_________________________________________________________________________________________________________#
 
-plot(0, type="n", xlim=c(0.4,8.75), ylim=ylim1, xlab="", xaxt="n", ylab="difference in distance from true tree", main="Robinson Fould distance - IQtree", mgp=c(3,0.9,0))
-axis(side=1, at=c(2.5, 7), c("Lophotrochozoa (62 spp)", "Myriapoda (25 spp)"))
-mtext(side=2, "(no partitioning - partitioning)", cex=0.75, line=2)
+#plot(0, type="n", xlim=c(0.4,8.75), ylim=ylim1, xlab="", axes=FALSE, ylab="Difference in normalized Robinson Foulds distance from true tree", mgp=c(3,0.9,0))
+plot(0, type="n", axes=FALSE, xlab="", ylab="")
+mtext(side=2, "Difference in normalized Robinson Foulds distance from true tree", cex=0.79, line=-0.3)
+mtext(side=2, "(no partitioning - partitioning)", cex=0.75, line=-1.6)
+#plot(0, type="n", xlim=c(0.4,8.75), ylim=ylim1, xlab="", xaxt="n", ylab="Difference in normalized Robinson Foulds distance from true tree", main="IQtree", mgp=c(3,0.9,0))
+
+plot(0, type="n", xlim=c(0.4,8.75), ylim=ylim1, xlab="", xaxt="n", ylab="", main="IQTREE_PartitionFinder", mgp=c(3,0.9,0))
+
+axis(side=1, at=c(2.5, 7), c("62 species simulated", "25 species simulated"))
+#mtext(side=2, "(no partitioning - partitioning)", cex=0.75, line=2)
 abline(h=0, col="gray75", lty=3, lwd=1.5)
-text(9,ytext1, expression(italic("partitioning better")), cex=1, col="green4")
-text(9,-ytext1, expression(italic("no partitioning better")), cex=1, col="red3")
 
 # lopho (62 spp)
 plot.function(dat, dataset="lopho", tree.distance="rf_dist", x.spot.adjustment=0, p.height=p.height1, p.height.factor=p.height.factor1)
 
 # myria (25 spp)
 plot.function(dat, dataset="myria", tree.distance="rf_dist", x.spot.adjustment=4.5, p.height=p.height1, p.height.factor=p.height.factor1)
+points(7.4, p.height1-0.025, pch="*", cex=2.5, col="green4")
 
 legend("bottomright", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", cex=0.875, pt.cex=1.5) # , bg="white"
-
-#_________________________________________________________________________________________________________#
-
-
-# eucl distance
-plot(0, type="n", xlim=c(0.4,8.75), ylim=ylim2, xlab="", xaxt="n", ylab="", main="Euclidean distance - IQtree", mgp=c(3,0.9,0))
-axis(side=1, at=c(2.5, 7), c("Lophotrochozoa (62 spp)", "Myriapoda (25 spp)"))
-mtext(side=2, "(no partitioning - partitioning)", cex=0.75, line=2)
-abline(h=0, col="gray75", lty=3, lwd=1.5)
-text(9,ytext1, expression(italic("partitioning better")), cex=1, col="green4")
-text(9,-ytext1, expression(italic("no partitioning better")), cex=1, col="red3")
-
-# lopho (62 spp)
-plot.function(dat, dataset="lopho", tree.distance="eucl_dist", x.spot.adjustment=0, p.height=p.height2, p.height.factor=p.height.factor2)
-
-# myria (25 spp)
-plot.function(dat, dataset="myria", tree.distance="eucl_dist", x.spot.adjustment=4.5, p.height=p.height2, p.height.factor=p.height.factor2)
-
-legend("bottomright", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", cex=0.875, pt.cex=1.5) # , bg="white"
-
-
-#_________________________________________________________________________________________________________#
 
 
 
 # RAxML RF distance
-plot(0, type="n", xlim=c(0.4,8.75), ylim=ylim1, xlab="", xaxt="n", ylab="difference in distance from true tree", main="Robinson Fould distance - RAxML", mgp=c(3,0.9,0))
-axis(side=1, at=c(2.5, 7), c("Lophotrochozoa (62 spp)", "Myriapoda (25 spp)"))
-mtext(side=2, "(no partitioning - partitioning)", cex=0.75, line=2)
+plot(0, type="n", xlim=c(0.4,8.75), ylim=ylim1, xlab="", xaxt="n", ylab="", main="RAxML_PartitionFinder", mgp=c(3,0.9,0))
+axis(side=1, at=c(2.5, 7), c("62 species simulated", "25 species simulated"))
 abline(h=0, col="gray75", lty=3, lwd=1.5)
-text(9,ytext1, expression(italic("partitioning better")), cex=1, col="green4")
-text(9,-ytext1, expression(italic("no partitioning better")), cex=1, col="red3")
+text(3,ytext1, expression(italic("partitioning better")), cex=1, col="green4")
+text(3,-ytext1, expression(italic("no partitioning better")), cex=1, col="red3")
 
 # lopho (62 spp)
 plot.function(dat, dataset="lopho", tree.distance="rf_dist_raxml", x.spot.adjustment=0, p.height=p.height1, p.height.factor=p.height.factor1)
@@ -481,30 +436,6 @@ plot.function(dat, dataset="lopho", tree.distance="rf_dist_raxml", x.spot.adjust
 # myria (25 spp)
 plot.function(dat, dataset="myria", tree.distance="rf_dist_raxml", x.spot.adjustment=4.5, p.height=p.height1, p.height.factor=p.height.factor1)
 
-legend("bottomright", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", cex=0.875, pt.cex=1.5) # , bg="white"
-
-
-#_________________________________________________________________________________________________________#
-
-
-# eucl distance RAxML
-plot(0, type="n", xlim=c(0.4,8.75), ylim=ylim2, xlab="", xaxt="n", ylab="", main="Euclidean distance - RAxML", mgp=c(3,0.9,0))
-axis(side=1, at=c(2.5, 7), c("Lophotrochozoa (62 spp)", "Myriapoda (25 spp)"))
-mtext(side=2, "(no partitioning - partitioning)", cex=0.75, line=2)
-abline(h=0, col="gray75", lty=3, lwd=1.5)
-text(9,ytext1, expression(italic("partitioning better")), cex=1, col="green4")
-text(9,-ytext1, expression(italic("no partitioning better")), cex=1, col="red3")
-
-# lopho (62 spp)
-plot.function(dat, dataset="lopho", tree.distance="eucl_dist_raxml", x.spot.adjustment=0, p.height=p.height2, p.height.factor=p.height.factor2)
-
-# myria (25 spp)
-plot.function(dat, dataset="myria", tree.distance="eucl_dist_raxml", x.spot.adjustment=4.5 , p.height=p.height2, p.height.factor=p.height.factor2)
-
-legend("bottomright", c("10", "20", "40", "80"), pch=15, col=samp.size.col, title = "num. genes", cex=0.875, pt.cex=1.5) # , bg="white"
-
 
 dev.off()
 
-
-#}

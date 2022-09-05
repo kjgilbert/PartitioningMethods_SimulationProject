@@ -1,3 +1,8 @@
+Testing approaches for phylogenetic tree building using partitioning methods -- simulation-based testing with ALF.
+
+
+Original idea from Christophe:
+
 Hi Kim, if you are interested, I’d like to involve you on a little subproject that could be 
 part of a paper we would like to resubmit. The paper tests partitioning methods for phylogenetic 
 inference. The idea of partitioning methods is that there are different subsets of sites, each 
